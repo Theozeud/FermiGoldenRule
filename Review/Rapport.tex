@@ -1,4 +1,4 @@
-\documentclass[11pt,openany,a4paper, titlepage]{article}
+\documentclass[12pt,openany,a4paper, titlepage]{article}
 
 %import package
 \usepackage[utf8]{inputenc}
@@ -89,6 +89,8 @@
 \newtheorem{ex}{Exemple}
 \theoremstyle{definition}
 \newtheorem{rem}{Remarque}
+\newtheorem{postulat}{Postulat}
+\theoremstyle{definition}
 
 
 \everymath{\displaystyle}
@@ -123,6 +125,57 @@
 
 \subsection{La mécanique quantique}
 
+Développé dans les années par une dizaine de physiciens devenus célèbres dont notamment Paul Dirac, Werner Heisenberg, Louis de Broglie, Erwin Schrödinger etc.,  la mécanique quantique est la branche de la physique théorique qui permet d'expliquer le comportement des particules élémentaires, des atomes, des molécules ou de tout système physique de taille similaire. Elle a rencontré de nombreux succès en permettant d'expliquer ce que la physique classique ne pouvait pas, par exemple la structure électronique des atomes et des molécules, .... . 
+
+Nous ne prétendons pas ici à fournir ne serait-ce qu'une introduction d'introduction d'un vrai cours de mécanique quantique, et bon nombre de concepts et de résultats élémentaires seront omis. Pour plus de détails, nous renvoyons le lecteur à [], [] ou []. Nous allons nous concentrer sur ce que l'on appelle les postulats de la mécanique quantique qui permettent de poser les bases de la modélisation mathématique et de ses outils avec lesquels nous allons traiter tout au long de ce rapport.
+
+\vspace{3mm}
+\begin{tcolorbox}[colback=gray!5!white,
+                  colframe=gray!80!white,
+                  title= Postulat 1 : Principe de superposition ]
+L'état d'un système quantique est défini à tout instant $t$ par un vecteur unitaire, dénoté $|\psi(t)\rangle$, appartenant à un espace de Hilbert complexe $\HH$ séparable.
+\end{tcolorbox}
+\vspace{3mm}
+
+\vspace{3mm}
+\begin{tcolorbox}[colback=gray!5!white,
+                  colframe=gray!80!white,
+                  title= Postulat 2 : Principe de correspondance ]
+
+\end{tcolorbox}
+\vspace{3mm}
+
+\vspace{3mm}
+\begin{tcolorbox}[colback=gray!5!white,
+                  colframe=gray!80!white,
+                  title= Postulat 3 : Principe de quantification ]
+
+\end{tcolorbox}
+\vspace{3mm}
+
+\vspace{3mm}
+\begin{tcolorbox}[colback=gray!5!white,
+                  colframe=gray!80!white,
+                  title= Postulat 4 : Principe de décomposition spectrale ]
+
+\end{tcolorbox}
+\vspace{3mm}
+
+\vspace{3mm}
+\begin{tcolorbox}[colback=gray!5!white,
+                  colframe=gray!80!white,
+                  title= Postulat 5 : Principe de réduction du paquet d’onde ]
+
+\end{tcolorbox}
+\vspace{3mm}
+
+\vspace{3mm}
+\begin{tcolorbox}[colback=gray!5!white,
+                  colframe=gray!80!white,
+                  title= Postulat 6 : Evolution d'un système dans le temps ]
+
+\end{tcolorbox}
+\vspace{3mm}
 
 
 \subsection{La règle d'or de Fermi} 
@@ -151,6 +204,37 @@ En résumé,
 \subsection{Objectifs de ce projet}
 
 Comme nous l'avons dit, la règle d'or de Fermi est un résulta bien connue des physiciens. Toutefois, les preuves que l'on peut trouver dans des livres de physiques reposent souvent sur des hypothèses pas toujours claires voire douteuse. A tire d'exemple, Wikipédia [] propose une preuve dans le paragraphe qui fait une hypothèse qui n'est pas clair. Les mathémaciens, comme souvent, ont cherché à justifier rigoureussement les assertions des physiciens et sont parvenu à établir des résultats sur la règle d'or de Fermi. L'objectif de ce projet est donc d'étudier différentes preuves permettant d'établir la règle d'or de Fermi. Nous investigureons deux approches très différents, une dite par les résonnances, qui reposent sur de nombreux concepts de théorie spectrale, et sur l'approche de Davies qui repose sur l'étude d'un problème d'évolution. Nous chercherons à expliciter et simplifier ces démonstrations  dans le cas de systèmes quantiques simples ainsi qu'à comparer ces deux approches. Nous proposons aussi l'étude de [dimension finie]. 
+
+\section{Introduction of the main Mathematical tools}
+
+Pour étudier la règle d'or de Fermi, et les problèmes de mécaniques quantiques en général, les mathématiciens ont recours à une théorie fondamentale : la théorie spectrale. Cette théorie a pour but d'étudier le comportement d'opérateurs linéaires sur des espaces de Hilbert ou de Banach potentiellement (et surtout ) de dimension infinie, et de leurs spectres, généralisant les études bien connues sur les matrices, opérateur de dimension finie. 
+
+[Continuer intro]
+
+Il faut un cours entier de M2 pour établir les éléments introductifs de la théorie spectrale et commencer à entrevoir les théorie sous-jacente, comme la théorie des perturbations de Kato, le principe du maximum ou la théorie de la diffusion. Cette théorie requiert 
+
+\subsection{Premières définitions} (1 Pages)
+
+- Déf opérateur, bornée, non-bornée, symétrique
+- Déf adjoint d'un opérateur, déf autoadjoint (généralisation de Hermitienne)
+- Exemples
+
+\subsection{Spectre et Résolvant} (1.5 pages)
+
+- Déf résolvant, spectre et différents types de spectre
+- Identité du résolvant
+- Opérateur conjugué => même spectre
+- Spectre opérateur compact, auto-adjoint (juste propriétés), quelques inégalité et petit principe du maximum
+
+
+\subsection{Calculs fonctionnels} (1.5 pages)
+
+Intro pour dire pourquoi on s'intéresse à ca : e(iH), généralisation du spectre d'un opérateur T
+- Déf convergence forte généralisée
+
+\subsection{Schrodinger-equations}
+
+
 
 \newpage
 \section{Approche par les résonances}
@@ -256,34 +340,6 @@ En utilisant successivement la formule de Cauchy, l'égalité définissant les m
 \appendix
 \appendixpage
 \addappheadtotoc
-\section{Introduction of the main Mathematical tools}
-
-Pour étudier la règle d'or de Fermi, et les problèmes de mécaniques quantiques en général, les mathématiciens ont recours à une théorie fondamentale : la théorie spectrale. Cette théorie a pour but d'étudier le comportement d'opérateurs linéaires sur des espaces de Hilbert ou de Banach potentiellement (et surtout ) de dimension infinie, et de leurs spectres, généralisant les études bien connues sur les matrices, opérateur de dimension finie. 
-
-[Continuer intro]
-
-Il faut un cours entier de M2 pour établir les éléments introductifs de la théorie spectrale et commencer à entrevoir les théorie sous-jacente, comme la théorie des perturbations de Kato, le principe du maximum ou la théorie de la diffusion. Cette théorie requiert 
-
-\subsection{Premières définitions} (1 Pages)
-
-- Déf opérateur, bornée, non-bornée, symétrique
-- Déf adjoint d'un opérateur, déf autoadjoint (généralisation de Hermitienne)
-- Exemples
-
-\subsection{Spectre et Résolvant} (1.5 pages)
-
-- Déf résolvant, spectre et différents types de spectre
-- Identité du résolvant
-- Opérateur conjugué => même spectre
-- Spectre opérateur compact, auto-adjoint (juste propriétés), quelques inégalité et petit principe du maximum
-
-
-\subsection{Calculs fonctionnels} (1.5 pages)
-
-Intro pour dire pourquoi on s'intéresse à ca : e(iH), généralisation du spectre d'un opérateur T
-- Déf convergence forte généralisée
-
-\subsection{Schrodinger-equations}
 
 \section{Biblio}
 
