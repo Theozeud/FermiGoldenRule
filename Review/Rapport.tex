@@ -1,4 +1,4 @@
-\documentclass[11pt,openany,a4paper]{article}
+\documentclass[11pt,openany,a4paper, titlepage]{article}
 
 %import package
 \usepackage[utf8]{inputenc}
@@ -8,15 +8,16 @@
 \usepackage{amsfonts,amsmath,amssymb,amsthm}
 \usepackage{geometry} %fix the margin of the document
 \geometry{top=3cm, bottom=3cm, left=2.5cm, right=2.5cm}
-\usepackage{xargs} %define new command
+\usepackage{xargs}    %define new command
 \usepackage{graphicx} %insertion image
-\usepackage{caption} %insertion de légendes et titres
+\usepackage{caption}  %insertion de légendes et titres
 \usepackage{indentfirst}
 \usepackage{color}
 \usepackage[table]{xcolor}
 \usepackage{float}
 \usepackage{tcolorbox}
 \usepackage{appendix} % Appendices
+
 
 % Bibliographie
 \usepackage[backend=biber,sorting=nyt,citestyle=authoryear,bibstyle=alphabetic]{biblatex}% Bibliographie
@@ -55,12 +56,16 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\HH}{\mathcal{H}}
 \newcommand{\spec}{\operatorname{spec}}
+\newcommand{\res}{\operatorname{res}}
 \newcommand{\specp}{\operatorname{spec_p}}
 \newcommand{\essran}[1]{\operatorname{ess_{#1}ran}}
 \newcommand{\esssup}[1]{\operatorname{ess_{#1}sup}}
 \newcommand{\rd}{\mathbb{R}^d}
-
+\newcommand{\vp}{\varphi}
+\newcommand{\He}{H(\epsilon)}
+\newcommand{\inv}{^{-1}}
 \newcommand{\St}[2]{e^{-i #1 #2}}
 \newcommand{\Stt}[2]{e^{i #1 #2}}
 \newcommand{\ortho}{P^\perp}
@@ -88,12 +93,27 @@
 
 \everymath{\displaystyle}
 
-\title{The Fermi Golden Rule}
+\title{La règle d'or de Fermi}
 \author{Théo Duez }
+
+%\begin{figure}
+%    \begin{minipage}[c]{.46\linewidth}
+%       \includegraphics[height=6cm]{Enrico_Fermi.png} 
+%        \caption{"Enrico Fermi"}
+%    \end{minipage} \hfill
+%    \begin{minipage}[c]{.46\linewidth}
+%        \includegraphics[height=6cm]{Paul_Dirac.jpg}
+%        \caption{"Paul Dirac"}
+%    \end{minipage}
+%\end{figure}
+
 
 \begin{document}
 
+
 \maketitle
+
+\newpage
 
 \tableofcontents
 
@@ -102,6 +122,8 @@
 \section{Introduction}
 
 \subsection{La mécanique quantique}
+
+
 
 \subsection{La règle d'or de Fermi} 
 
@@ -128,20 +150,56 @@ En résumé,
 
 \subsection{Objectifs de ce projet}
 
-Dire les notations et les hypothèses que l'on fait
+Comme nous l'avons dit, la règle d'or de Fermi est un résulta bien connue des physiciens. Toutefois, les preuves que l'on peut trouver dans des livres de physiques reposent souvent sur des hypothèses pas toujours claires voire douteuse. A tire d'exemple, Wikipédia [] propose une preuve dans le paragraphe qui fait une hypothèse qui n'est pas clair. Les mathémaciens, comme souvent, ont cherché à justifier rigoureussement les assertions des physiciens et sont parvenu à établir des résultats sur la règle d'or de Fermi. L'objectif de ce projet est donc d'étudier différentes preuves permettant d'établir la règle d'or de Fermi. Nous investigureons deux approches très différents, une dite par les résonnances, qui reposent sur de nombreux concepts de théorie spectrale, et sur l'approche de Davies qui repose sur l'étude d'un problème d'évolution. Nous chercherons à expliciter et simplifier ces démonstrations  dans le cas de systèmes quantiques simples ainsi qu'à comparer ces deux approches. Nous proposons aussi l'étude de [dimension finie]. 
 
+\newpage
 \section{Approche par les résonances}
 
-Dans cette partie, nous présentons l'approche dite par les résonances, dénomination que nous expliquerons dans la suite. Commençons par fixer les notations qui seront valables dans toute la suite de cette partie. Soit $H$ l'opérateur Hamiltonien 
+Dans cette partie, nous abordons l'approche dite par les résonances, dénomination que nous expliquerons dans la suite. Nous reprenons les notations fixées précédemment ([]). L'idée est d'utiliser les formules de Cauchy de théorie spectrale pour se ramener à un problème avec une intégrale complexe. Si $H_0$ est un opérateur bornée de $\mathcal{H}$ dans $\mathcal{H}$ alors son spectre est borné, plus précisément $\spec H_0 \subseteq \lc-||H_0||, ||H_0||\rcc$. La théorie des perturbations classique indique que le spectre de $H(\epsilon$ est "proche" du spectre de $H_0$ lorsque $\epsilon$ est petit. Il existe donc un contour $\Gamma$ dans $\C$ tel que $\spec H \subset int(\Gamma)$ où $int(\Gamma)$ est l'unique composante connexe bornée  de $\C\setminus \Gamma$. On écrit donc d'abord (voir []) :
 
+\begin{equation}
+    \la \vp_0 | e^{-i\He t} \vp_0\ra = \f{1}{2i\pi}\oint_\Gamma e^{-itz}\la \varphi_0,\lp H(\epsilon)  -z \rp^{-1} \varphi_0 \ra dz.
+\end{equation}
 
-\subsection{The Livsic Matrix}
+On a remplacé l'étude sur l'exponentielle de $\He$ en une étude de sa résolvante.
+\newpage
+\subsection{Matrice de Livsic}
 
-Comme expliquer plus haut, une des approches pour établir la règle d'or de Fermi consiste à se ramener à étudier la quantité impliquant la résolvante : $\la \phi_0  | (H-z)^{-1} \phi_0\ra$ où $\phi_0$ appartient à un sous-espace de $\mathcal{H}$ fini dimensionnel noté $E_0$. Si on note $P$ le projecteur orthogonal sur ce sous-espace, on a que $P\phi_0 = \phi_0$ et donc $\la \phi_0  | e^{-Ht} \phi_0\ra = \la P\phi_0  | (H-z)^{-1} P\phi_0\ra = \la \phi_0  | P(H-z)^{-1} P\phi_0\ra$ car tout projecteur orthogonal est auto-adjoint (). Si $E_0$ est de dimension 1, on a même que $\langle \phi_0  | = P$ et $|\phi_0  \rangle = P^* = P$. On voit donc que pour établir la règle d'or de Fermi, il convient d'étudier l'opérateur $P(H-z)^{-1}P$.
+Considérons un opérateur $H$ auto-adjoint sur un espace de Hilbert $\HH$, $E_0$ un sous-espace vectoriel de dimension finie de $\HH$, et $P$ la projection orthogonal sur ce sous-espace. Comme expliquer plus haut, l'approche par les résonances consiste à se ramener à étudier la quantité impliquant la résolvante $R(z) := (H - z)\inv$ et la projection $P$  :
+\begin{equation}\label{compression}
+    P(H - z)\inv P
+\end{equation}
+où $z$ est un complexe. Cette quantité est comme la résolvante bien définie et holomorphe sur $\res H$. A l'instar des différents types de singularités en analyse complexe, cette quantité est méromorphe sur une certaine partie du spectre : le spectre discret. Pour rappel, le spectre discret $\spec_d H$ est l'ensemble des valeurs propres de multiplicité finie de $H$. La résolvante, et donc la compression (\ref{compression}), est donc méromorphe sur le spectre essentiel $\spec_{ess} H = \spec\setminus\spec_d H$. 
 
-\begin{prop}[Livsic Matrix]
-    Soit $H$ un opérateur autoadjoint sur un espace de Hilbert.
+La formule (\ref{compression}) n'est pas très explicite tel quel et signifie
+
+On a la proposition suivante qui va nous permettre de définir la matrice de Livsic.
+
+\begin{prop}
+    $PR(z)P$ est inversible pour $z\in\C\setminus\R$.
 \end{prop}
+\begin{proof}
+    Une remarque importante à faire est que $PR(z)P$ est un endomorphisme linéaire de $E_0$ qui est de dimension finie. Il suffit donc de montrer que cette quantité est injective. Soit $z = a+ib\in\C\setminus\R$ et $x\in E_0$ tel que $PR(z)Px = 0$. En particulier, on a 
+
+    $$0 = \im\la x\,,\, PR(z)Px \ra = \im\la x\,,\, R(z)x \ra = b\lb\lb\lp (H-a)^2 + b^2 \rp^{-1/2}x\rb\rb^2$$
+    car $x = Px$, et car $P$ et $H$ sont auto-adjoint. Comme $b$ est non nul, nécessairement $x = 0$.
+\end{proof}
+
+Cela nous permet de définir la notion de matrice de Livsic.
+
+\begin{Def}[Matrice de Livsic]
+Pour $z\in \C\setminus\R$, on définit la matrice de Livsic par
+\begin{equation*}
+    B(z) = (PR(z)P)\inv + z
+\end{equation*}
+qui vérifie l'identité 
+\begin{equation*}
+    (B(z)-z)\inv = P(H-z)\inv P.
+\end{equation*}
+Cet identité nous permet d'étendre la définition de $B(z)$ sur $\C\setminus\spec_{ess} H$.
+\end{Def}
+
+Nous avons les deux propriétés suivantes.
 
 \begin{rem}
 Cette notion de matrice de Livsic fait écho avec sa version finie dimensionnelle bien connue : le complément de Schur.  
@@ -155,7 +213,7 @@ A_{21} & A_{22}
 avec $A_{11}\in\R^{n\times n},  A_{12}\in\C^{n\times m}, A_{21}\in\C^{m\times n}$ et $A_{22}\in\C^{m\times m}$. Soit $\lambda \in \R$ et cherchons à résoudre le problème aux valeurs propres $Ax = \lambda x$ d'inconnue $x\in\R^{n+m}$ en supposant que $\lambda$ ne soit pas valeur propre de $A_{22}$. La deuxième ligne de ce système conduit à l'égalité $x_2 = -(A_{22}-\lambda)^{-1}A_{21}x_1$ que l'on peut injecter dans la première ligne et obtenir $(A_{11} - A_{12}(A_{22}-\lambda)^{-1}A_{21})x_1 = \lambda x_1 $. On voit que l'on a bien réduit la dimension du problème de départ et que $\lambda$ est valeur propre de $A$ si et seulement si $\lambda$ est valeur propre de $(A_{11} - A_{12}(A_{22}-\lambda)^{-1}A_{21})$.
 \end{rem}
 
-\subsection{Howland's Theorem}
+\subsection{Théorème de Howland}
 
 Dans son article intitulé \textit{The Livsic  Matrix in Perturbation Theory}, James S. Howland propose en 1975 un théorème de concentration spectrale intéressant, sous l'hypothèse relativement forte mais qui est souvent vérifiée : la possibilité d'effectuer un prolongement analytique de la matrice de Livisc du plan complexe supérieur vers le plan complexe inférieur.
 
