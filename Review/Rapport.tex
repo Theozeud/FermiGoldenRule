@@ -18,9 +18,8 @@
 \usepackage{tcolorbox}
 \usepackage{appendix} % Appendices
 
-
 % Bibliographie
-\usepackage[backend=biber,sorting=nyt,citestyle=authoryear,bibstyle=alphabetic]{biblatex}% Bibliographie
+\usepackage[backend=biber,sorting=nyt,citestyle=numeric,bibstyle=alphabetic]{biblatex}% Bibliographie
 \addbibresource{biblio.bib} 
 \usepackage{csquotes}
 \usepackage{url}
@@ -94,7 +93,6 @@
 \newtheorem{postulat}{Postulat}
 \theoremstyle{definition}
 
-
 \everymath{\displaystyle}
 
 \title{La règle d'or de Fermi}
@@ -150,6 +148,10 @@ L'état d'un système quantique est défini à tout instant $t$ par un vecteur u
     \end{enumerate}
 \end{exs}
 
+\begin{rem}
+    Expliquons pourquoi on demande à ce que $|\psi(t)\rangle$ soit de norme constante égale à $1$ au cours du temps. Cela est due au fait bien connue que la mécanique quantique est une description probabiliste de la physique. Si par exemple $\HH = \ell^2(A)$, on doit donc avoir $||\psi(t)||^2 = \sum_{a\in A} |\psi_a(t)|^2$ et si ou bien $\HH = L^2(\R^d,\C)$, on doit avoir $\int_{\R^d}|\psi(t,x)|^2dx = 1$. Dans le premier cas, on doit penser $|\psi_a(t)|^2$ une probabilité sur l'atome (au sens mathématique) $\{a\}$ et $|\psi(t,x)|^2$ plutôt la une densité de probabilité au point $x \in \R^d$. La position moyenne d'une particule se mouvant dans $A$ s'écrit donc par théorème de transfert $\sum_{a\in A} a|\psi_a(t)|^2$ et si elle se meut dans $\R^d$ elle s'écrit $\int_{\R^d}x|\psi(t,x)|^2dx$.
+\end{rem}
+
 \vspace{3mm}
 \begin{tcolorbox}[colback=gray!5!white,
                   colframe=gray!80!white,
@@ -162,8 +164,17 @@ A tout observable classique correspond un opérateur linéaire $A$ autoadjoint s
     $A$ est simplement une matrice si $\HH$ est de dimension finie mais peut être un opérateur possiblement non borné si $\HH$ est de dimension infinie. L'étude de tels opérateurs, et à l'instar des matrices de leur spectre et diagonalisabilité, fait l'objet de la théorie dite spectrale dont nous ferons un très rapide tour dans la section suivante. Ici autoadjoint est une généralisation à la dimension infinie de la notion d'hermitianité pour les matrices complexes.
 \end{rem}
 
-\begin{ex}
-    
+\begin{ex} 
+Donnons quelques exemples pour des systèmes vivant dans l'espace le plus intéressant, $L^2(\R^d,\C)$ où $d\in\N$. A titre d'exemple, considérons que le système est constitué d'un électron libre.
+\begin{enumerate}
+    \item[1] Parler de la position, au sens classique, de l'électron en mécanique quantique n'a pas de sens puisque l'état d'un système est représenté uniquement par un vecteur $|\psi\rangle$ de l'espace de Hilbert $\HH$, ici une fonction définie sur tout $\R^d$. C'est d'ailleurs pourquoi on entend parler en mécanique quantique du "nuage électronique". En mécanique quantique, la position est un opérateur $X$ définie comme $$X|\psi\rangle = x\in \R^d \mapsto x|\psi\rangle(x) \in \C$$ de sorte qu'avec la remarque précédente, la position moyenne s'écrit $$ \langle \psi | X | \psi \rangle.$$ En fait, on appelle moyenne de l'observable $A$, la quantité $\langle \psi | A | \psi \rangle$, ce qui justifie la définition de l'opérateur position. On remarque que l'opérateur $X$ est bien un opérateur autoadjoint : soit $\psi_1, \psi_2 \in \HH$
+    \begin{equation}
+        \la\psi_1, X\psi_2\ra =\int_{\R^d}\overline{\psi_1(x)}x\psi_2(x) \dd x
+        = \int_{\R^d}\overline{x\psi_1(x)}\psi_2(x) \dd x 
+        = \la X\psi_1, \psi_2\ra.
+    \end{equation}
+    \item[2]
+\end{enumerate}
 \end{ex}
 
 
@@ -171,9 +182,14 @@ A tout observable classique correspond un opérateur linéaire $A$ autoadjoint s
 \begin{tcolorbox}[colback=gray!5!white,
                   colframe=gray!80!white,
                   title= Postulat 3 : Principe de quantification ]
-
+Quelque soit l'état du système, la mesure d'une observable $A$ ne peut être qu'une valeur propre de l'observable $A$.
 \end{tcolorbox}
 \vspace{3mm}
+
+\begin{rem}
+    Lorsque l'on parle ici de mesure, il s'agit bien là d'une mesure physique réalisé à l'aide d'instruments et sous intervention humaine, ce qui est un point déroutant en mécanique quantique. 
+\end{rem}
+
 
 \vspace{3mm}
 \begin{tcolorbox}[colback=gray!5!white,
@@ -187,7 +203,7 @@ A tout observable classique correspond un opérateur linéaire $A$ autoadjoint s
 \begin{tcolorbox}[colback=gray!5!white,
                   colframe=gray!80!white,
                   title= Postulat 5 : Principe de réduction du paquet d’onde ]
-
+Immédiatement après une mesure de l'observable $A$, si la mesure est $a$
 \end{tcolorbox}
 \vspace{3mm}
 
@@ -239,7 +255,7 @@ En résumé,
 
 Comme nous l'avons dit, la règle d'or de Fermi est un résulta bien connue des physiciens. Toutefois, les preuves que l'on peut trouver dans des livres de physiques reposent souvent sur des hypothèses pas toujours claires voire douteuse. A tire d'exemple, Wikipédia [] propose une preuve dans le paragraphe qui fait une hypothèse qui n'est pas clair. Les mathémaciens, comme souvent, ont cherché à justifier rigoureussement les assertions des physiciens et sont parvenu à établir des résultats sur la règle d'or de Fermi. L'objectif de ce projet est donc d'étudier différentes preuves permettant d'établir la règle d'or de Fermi. Nous investigureons deux approches très différents, une dite par les résonnances, qui reposent sur de nombreux concepts de théorie spectrale, et sur l'approche de Davies qui repose sur l'étude d'un problème d'évolution. Nous chercherons à expliciter et simplifier ces démonstrations  dans le cas de systèmes quantiques simples ainsi qu'à comparer ces deux approches. Nous proposons aussi l'étude de [dimension finie]. 
 
-\section{Introduction of the main Mathematical tools}
+\section{Très brève introduction de théorie Spectrale}
 
 Pour étudier la règle d'or de Fermi, et les problèmes de mécaniques quantiques en général, les mathématiciens ont recours à une théorie fondamentale : la théorie spectrale. Cette théorie a pour but d'étudier le comportement d'opérateurs linéaires sur des espaces de Hilbert ou de Banach potentiellement (et surtout ) de dimension infinie, et de leurs spectres, généralisant les études bien connues sur les matrices, opérateur de dimension finie. 
 
@@ -283,9 +299,9 @@ On a remplacé l'étude sur l'exponentielle de $\He$ en une étude de sa résolv
 \newpage
 \subsection{Matrice de Livsic}
 
-Nous abordons dans cette partie la notion de matrice de Livsic qui a été introduite en 1957 par M.S Livsic [], et qui a été redécouvert de nombreuses fois sous différents noms par les physiciens. Il s'agit de la version infini-dimensionnelle de la notion complément de Schur dont nous ferons un parallèle dans la suite. Considérons un opérateur $H$ auto-adjoint sur un espace de Hilbert $\HH$, $E_0$ un sous-espace vectoriel de dimension finie de $\HH$, et $P$ la projection orthogonal sur ce sous-espace. La matrice de Livsic est un outil central pour l'approche par les résonances et de façon informel s'agit d'une matrice $B(z)$ dépendant de la variable complexe $z$ qui permet de réécrire la compression $P(H-z)\inv P = (B(z) -z)\inv$. Ainsi, en donnant une formule explicite à cette matrice, nous pourrons étudier de façon explicite le fait que l'on s'intéresse au bloc $(E_0,E_0)$ dans la décomposition $E_0\oplus E_0^\perp$ de la résolvante de $H$.
+Nous abordons dans cette partie la notion de matrice de Livsic qui a été introduite en 1957 par M.S Livsic \cite{HOWLAND1975415}, et qui a été redécouvert de nombreuses fois sous différents noms par les physiciens. Il s'agit de la version infini-dimensionnelle de la notion complément de Schur dont nous ferons un parallèle dans la suite. Considérons un opérateur $H$ auto-adjoint sur un espace de Hilbert $\HH$, $E_0$ un sous-espace vectoriel de dimension finie de $\HH$, et $P$ la projection orthogonal sur ce sous-espace. La matrice de Livsic est un outil central pour l'approche par les résonances et de façon informel s'agit d'une matrice $B(z)$ dépendant de la variable complexe $z$ qui permet de réécrire la compression $P(H-z)\inv P = (B(z) -z)\inv$. Ainsi, en donnant une formule explicite à cette matrice, nous pourrons étudier de façon explicite le fait que l'on s'intéresse au bloc $(E_0,E_0)$ dans la décomposition $E_0\oplus E_0^\perp$ de la résolvante de $H$.
 
-Faisons un petit rappel sur la résolvante notée $R(z) := (H-z)\inv$. Cette quantité est bien définie sur le complémentaire du spectre de $H$ et y ait holomorphe. A l'instar des différents types de singularités en analyse complexe, cette quantité est méromorphe sur une certaine partie du spectre : le spectre discret. Pour rappel, le spectre discret $\spec_d H$ est l'ensemble des valeurs propres de multiplicité finie de $H$. La résolvante est donc méromorphe sur le spectre essentiel $\spec_{ess} H = \spec H\setminus\spec_d H$. La compression $PR(z)P$ est donc aussi méromorhpe sur  $\spec_{ess} H$.
+Faisons un petit rappel sur la résolvante notée $R(z) := (H-z)\inv$. Cette quantité est bien définie sur le complémentaire du spectre de $H$ et y est holomorphe. A l'instar des différents types de singularités en analyse complexe, cette quantité est méromorphe sur une certaine partie du spectre : le spectre discret. Pour rappel, le spectre discret $\sigma_d(H)$ est l'ensemble des valeurs propres de multiplicité finie de $H$. La résolvante est donc méromorphe sur le complémentaire du spectre essentiel $\sigma_{ess}(H) = \sigma(H)\setminus\sigma_d H$. La compression $PR(z)P$ est donc aussi méromorhpe sur  $\C\setminus\sigma_{ess}(H)$.
 
 Commençons par établir l'existence d'une telle matrice $B(z)$. Celle-ci repose sur le faire que la compression $PR(z)P$ est un opérateur de dimension finie, i.e une matrice, et la proposition suivante.
 
@@ -302,7 +318,7 @@ Commençons par établir l'existence d'une telle matrice $B(z)$. Celle-ci repose
 Cela nous permet de définir la notion de matrice de Livsic.
 
 \begin{Def}[Matrice de Livsic]
-Pour $z\in \C\setminus\R$, on définit la matrice de Livsic par
+Pour $z\in \C\setminus\R$, on définit la matrice de Livsic sur $E_0$ par
 \begin{equation*}
     B(z) := (PR(z)P)\inv + z
 \end{equation*}
@@ -310,12 +326,16 @@ qui vérifie l'identité
 \begin{equation*}
     (B(z)-z)\inv = P(H-z)\inv P.
 \end{equation*}
-Cet identité nous permet d'étendre la définition de $B(z)$ sur $\C\setminus\spec_{ess} H$.
+Cet identité nous permet d'étendre la définition de $B(z)$ sur $\C\setminus\sigma_{ess}(H)$.
 \end{Def}
 
-Nous avons les deux propriétés suivantes.
-
 \begin{rem}
+    La dénomination \textit{matrice} de Livsic est bien choisie car l'opérateur $B(z)$ est bien un endomorphisme linéaire d'un espace vectoriel de dimension finie,$E_0$, pour tout $z\in\C\setminus\sigma_{ess}(H)$.
+\end{rem}
+
+La connaissance de l'existence d'une telle matrice $B(z)$ n'est pas très utile en soi, et une expression explicite en fonction de $z$, de $P$ et de $H$ serait plus intéressante. Pour ce faire quelques idées, nous allons d'abord analyser le cas où $\dim \HH < +\infty$ dans le paragrphe suivant. 
+
+\paragraph{Complément de Schur}
 Cette notion de matrice de Livsic fait écho avec sa version finie dimensionnelle bien connue : le complément de Schur.  
 Soient $n,m \in\N^*$. Considérons une matrice $A\in\C^{(n+m)\times (n+m)}$ hermitienne s'écrivant 
 \begin{equation*}
@@ -324,8 +344,33 @@ A_{11} & A_{12} \\
 A_{21} & A_{22} 
 \end{pmatrix}
 \end{equation*}
-avec $A_{11}\in\R^{n\times n},  A_{12}\in\C^{n\times m}, A_{21}\in\C^{m\times n}$ et $A_{22}\in\C^{m\times m}$. Soit $\lambda \in \R$ et cherchons à résoudre le problème aux valeurs propres $Ax = \lambda x$ d'inconnue $x\in\R^{n+m}$ en supposant que $\lambda$ ne soit pas valeur propre de $A_{22}$. La deuxième ligne de ce système conduit à l'égalité $x_2 = -(A_{22}-\lambda)^{-1}A_{21}x_1$ que l'on peut injecter dans la première ligne et obtenir $(A_{11} - A_{12}(A_{22}-\lambda)^{-1}A_{21})x_1 = \lambda x_1 $. On voit que l'on a bien réduit la dimension du problème de départ et que $\lambda$ est valeur propre de $A$ si et seulement si $\lambda$ est valeur propre de $(A_{11} - A_{12}(A_{22}-\lambda)^{-1}A_{21})$.
-\end{rem}
+avec $A_{11}\in\R^{n\times n},  A_{12}\in\C^{n\times m}, A_{21}\in\C^{m\times n}$ et $A_{22}\in\C^{m\times m}$. Soit $\lambda \in \R$ et cherchons à résoudre le problème aux valeurs propres $Ax = \lambda x$ d'inconnue $x\in\R^{n+m}$ en supposant que $\lambda$ ne soit pas valeur propre de $A_{22}$. La deuxième ligne de ce système conduit à l'égalité $x_2 = -(A_{22}-\lambda)^{-1}A_{21}x_1$ que l'on peut injecter dans la première ligne et obtenir $(A_{11} - A_{12}(A_{22}-\lambda)^{-1}A_{21})x_1 = \lambda x_1 $. On voit que l'on a bien réduit la dimension du problème de départ et que $\lambda$ est valeur propre de $A$ si et seulement si $\lambda$ est valeur propre de $(A_{11} - A_{12}(A_{22}-\lambda)^{-1}A_{21})$.\\
+
+Nous allons maintenant chercher à obtenir des résultats similaires dans le cas général. Ecrivons $H$ dans la décomposition $\HH = E_0 \oplus E_0^\perp$ :
+\begin{equation}
+    H = \begin{pmatrix}
+        T & \Gamma \\
+        \Gamma^* & A 
+\end{pmatrix}
+\end{equation}
+où $\Gamma$ est une application linéaire de $E_0^\perp$ dans $E_0$, $A$ et $T$ sont des opérateurs auto-adjoints respectivement de $E_0^\perp$ et de $E_0$. Autrement dit, on a $T = PHP$, $\Gamma = PH(I-P)$ et $A = (I-P)H(I-P)$.
+
+\begin{prop}[Formule explicite de la matrice de Livsic]
+Pour tout $z\in\C\setminus\sigma_{ess}(H)$, on a 
+\begin{equation}
+    B(z) = T - \Gamma(A -z)^{-1}\Gamma^*
+\end{equation}
+\end{prop}
+
+\begin{proof}
+    
+\end{proof}
+
+Le lien entre les valeurs propres de $B(z)$ et celles de $H$ est donné dans la proposition suivante.
+
+\begin{prop}
+    
+\end{prop}
 
 \subsection{Théorème de Howland}
 
@@ -361,6 +406,187 @@ En utilisant successivement la formule de Cauchy, l'égalité définissant les m
 
 \section{Second Approach : Davies's Theory}
 
+\subsection{Système stable}
+
+Considérons dans un premier temps un système quantique évoluant dans un espace de Hilbert $U$, dont le produit scalaire hermitien est noté $\langle \cdot, \cdot, \rangle$ et la norme $||\cdot ||$, selon un Hamiltonien $H$. Supposons que cet opérateur possède une valeur propre $\lambda_0 \in \R$ de multiplicité 1. Et notons $P$ la projection sur le sous-espace propre $E_0 := \Ker\lp \lambda_0 I - H_0 \rp$ associé de dimension 1 ainsi que $\ortho$ la projection sur le supplémentaire orthogonal. L'opérateur $H$ étant autoadjoint, il s'écrit relativement à la décomposition $E_0\oplus E_0^\perp$ :
+\begin{equation}
+    H = \begin{pmatrix}
+    \lambda_0 \cdot & 0 \\
+    0 & H_1 
+\end{pmatrix}
+\end{equation}
+où $H_1$ est un opérateur adjoint vue comme opérateur de $U$ dans $U$ de sorte que $E_0 \subseteq \Ker H_1$. Pour un opérateur $A$ autoajoint, on note $\lp\Pi_E(A)\rp_{E\in\mathcal{B}(\R)}$ sa mesure spectrale. On note $\phi_0$ un vecteur unitaire de $E_0$. Pour tout vecteur $\varphi \in U$ de norme 1, l'évolution du système partant de $\varphi$ peut s'écrire :
+$$\St{H}{t}\varphi = \la \phi_0, \varphi \ra \St{\lambda_0}{t} \phi_0 + \int_\R \St{\lambda}{t}\ortho \varphi \dd \Pi_{\{\lambda\}}(H_1).$$
+
+\begin{rem}
+L'opérateur de projection $P$ s'écrit en notation physicienne : $$ P = |\phi_0\rangle \langle \phi_0|.$$
+\end{rem}
+
+\subsection{Système légèrement perturbé}
+
+Supposons maintenant que le système subit une perturbation d'amplitude un paramètre $\epsilon$ représenté par un opérateur autoadjoint $A$. Le système évolue donc selon l'Hamiltonien total :
+$$ T := H + \epsilon A.$$
+Nous allons supposer que la perturbation $A$ a pour but d"introduire un couplage entre la valeur propre $\lambda_0$ et le reste du spectre de $H$ contenu dans le spectre de $H_1$. En d'autres termes on suppose que $PAP = \ortho A \ortho = 0$. Notons alors $A^\perp = \ortho A P$ et $A_\perp = P A \ortho$.
+En écrivant, $T = H + \epsilon A$, on peut écrire l'évolution de système sous deux formes, dont la deuxième fait intervenir la formule de Duhamel :
+$$ \St{T}{t} = \St{H}{t} + \epsilon\int_0^t \St{H}{(t-s)}A\St{T}{s}  ds.$$
+Il est facile de voir ce qui se passe sur $E_0$ lorsque $\epsilon = 0$ : une multiplication par $\St{\lambda_0}{t}$. Regardons maintenant lorsque $\epsilon > 0$ en calculant $P\St{T}{t}P$ :
+$$ P\St{T}{t}P = \St{\lambda_0}{t} + \epsilon\int_0^t \St{H}{(t-s)}A_\perp \ortho\St{T}{s}P  ds$$
+qui fait intervenir la contribution $\ortho\St{T}{s}P$ : 
+$$ \ortho\St{T}{t}P = \epsilon\int_0^t \St{H_1}{(t-s)}A^\perp P\St{T}{s}P  ds$$
+et en insérant la dernière expression dans la précédente, on obtient :
+$$ P\St{T}{t}P = \St{\lambda_0}{t} + \epsilon^2\int_0^t\int_0^s \St{H}{(t-s)}A_\perp \St{H_1}{(s-u)}A^\perp P\St{T}{u}P  duds.$$
+Nous noterons alors $$U(t) = P\St{T}{\f{t}{\epsilon^2}}P.$$
+
+\subsection{Opérateurs de Voltera}
+
+Dans cette section, nous rappelons quelques résultats sur les opérateurs de Voltera qui nous servirons pour montrer la règle d'or de Fermi dans la section suivante. On note ici $V$ l'espace de Banach des fonctions continues sur $[a,b]$ à valeurs dans un espace de Hilbert $U$.
+
+\begin{lem}[Décroissance des puissances]
+Soit $K$ un opérateur borné sur $V$ borné par $c$ dans $V'$ et $H$ l'opérateur borné sur $V$ définit par 
+$$H :f\in V \mapsto t\in[a,b] \mapsto \int_a^t Kf(s)ds.$$
+On a 
+\begin{equation}
+    ||H^n||_{V'} \leq \f{c^n(b-a)^n}{n!}.
+\end{equation}
+\end{lem}
+
+\begin{proof}
+Soit $f\in V$, $n\geq 2$ et $t\in[a,b]$. On a 
+\begin{eqnarray}
+    |H^nf(t)| &\leq&  \int_a^t ||K||_{V'}\int_a^s||K||_{V'}|H^{n-2}f(x)|dxds \\
+              &\leq& c^2 \lp -\lc (t-x)\int_a^s|H^{n-2}f(x)|dx\rcc_a^t + \int_a^t(t-x)|H^{n-2}f(x)|dx\rp \\
+              &\leq& c^2 \int_a^t(t-x)|H^{n-2}f(x)|dx \\
+              &\leq& \cdots \\
+              &\leq& c^n \int_a^t\f{(t-x)^{n-1}}{(n-1)!}|f(x)|dx \\
+              &\leq& c^n ||f||_V \f{(t-a)^n}{n!}.
+\end{eqnarray}
+d'où le résultat.
+\end{proof}
+
+\begin{lem}
+Soit $K$ un opérateur borné sur $V$ borné par $c$ dans $V'$ et $H$ l'opérateur borné sur $V$ définit par 
+$$H :f\in V \mapsto t\in[a,b] \mapsto \int_a^t Kf(s)ds.$$ Soit $x\in U$ vue comme une fonction constante de $V$. Si $f\in V$ vérifie l'équation 
+$$ f = x + Hf$$
+alors on a l'égalité 
+$$ f = \suminf{n}{1} H^nb.$$
+\end{lem}
+
+\begin{proof}
+Soit $N\geq 1$. On a $f = \sum_{n=1}^{N} H^nx + H^{N+1}f$ et par le lemme précédent, $$\lb\lb  f - \sum_{n=1}^{N} H^nx\rb\rb_V \leq \f{|x|(b-a)^{N+1}}{(N+1)!}$$ d'où le résultat.
+\end{proof}
+
+\begin{lem} [Convergence forte d'opérateurs de Voltera]
+Soit $(K_n)_{n\in\N}$ une suite de fonctions définies sur $[a,b]$ à valeurs dans l'ensemble des opérateurs bornées sur $V$ et $K$ un opérateur borné de $V$.
+Définissons également les opérateurs de $V$ dans $V$ :
+$$H_n :f\in V \mapsto t\in[a,b] \mapsto \int_a^t K_n(s)f(s)ds,$$ 
+et
+$$H :f\in V \mapsto t\in[a,b] \mapsto \int_a^t Kf(s)ds$$ 
+pour $n\in\N$.
+Supposons que l'on a les deux propriétés suivantes :
+\begin{enumerate}
+    \item $\exists C > 0, \; \sup\limits_{n\geq 1}\sup\limits_{a\leq t \leq b } ||K_n(t)||_{V'} \leq C$,
+    \item $\exists K:V\rightarrow V$ opérateur bornée tel que $\forall a'>a, \lim\limits_{n\geq 1}\sup\limits_{a'\leq t \leq b } ||K_n(t) - K||_{V'} = 0 $. 
+\end{enumerate}
+Alors $(H_n)$ converge fortement vers $H$.
+\end{lem}
+\begin{proof}
+Soit $f\in V$ et $n, m\geq 1$, on a 
+\begin{eqnarray}
+\lb\lb H_nf - Hf \rb\rb_V &\leq& \sup\limits_{a\leq t\leq b} \int_a^t ||K_n(s)f(s) - Kf(s)||ds \\
+                          &\leq& \int_a^b ||K_n(s)f(s) - Kf(s)||ds \\
+                          &\leq& T_1 + T_2.
+\end{eqnarray}
+avec
+\begin{equation}
+T_1 :=  \int_a^{a+\f{1}{m}} |K_n(s)f(s) - Kf(s)|ds,
+\end{equation}
+et 
+\begin{equation}
+T_2 :=  \int_{a+\f{1}{m}}^b |K_n(s)f(s) - Kf(s)|ds.
+\end{equation}
+Pour le premier, terme on utilise la propriété 1) : 
+\begin{eqnarray}
+T_1 &\leq& \int_a^{a+\f{1}{m}} \lp ||K_n(s)||_{V'} + ||K||_{V'}\rp ||f|| ds \\
+    &\leq& \lp \sup\limits_{n\geq 1}\sup\limits_{a\leq t \leq b } ||K_n(t)||_{V'} + ||K||_{V'}\rp ||f|| \times \f{1}{m}
+\end{eqnarray}
+donc 
+\begin{equation}
+\limsup\limits_{m\rightarrow +\infty} T_1 \leq  0.
+\end{equation}
+Pour le deuxième terme, on utilise la propriété 2) :
+\begin{eqnarray}
+T_2 &\leq& \int_{a+\f{1}{m}}^b |K_n(s)f(s) - Kf(s)|ds \\
+    &\leq& \sup\limits_{a+\f{1}{m} \leq t \leq b} ||K_n(t) - K||_{V'} ||f||_V \lp b - a - \f{1}{m} \rp,
+\end{eqnarray}
+et donc
+\begin{equation}
+\limsup\limits_{m\rightarrow +\infty}\limsup\limits_{n\rightarrow +\infty} T_2 \leq  0,
+\end{equation}
+ce qui prouve le résultat.
+\end{proof}
+
+\subsection{Règle d'or de Fermi}
+
+La règle d'or de Fermi stipule que, sous certaines hypothèses sur l'évolution du système, si on part de l'état propre $\psi_0$ associé à la valeur propre $\lambda_0$, la probabilité d'être encore dans cette état décroît exponentiellement avec le temps. Cette probabilité s'écrit 
+$$\la \psi_0,\psi(t) \ra = \la \psi_0, \St{T}{t} \psi_0 \ra = \la P\psi_0, \St{T}{t} P\psi_0 \ra = \la \psi_0, U(\epsilon^2t) \psi_0 \ra$$
+en utilisant le caractère autoadjoint du projecteur $P$. L'introduction des projecteurs dans l'écriture permet d'éclaircir sur quel sous espace, ici $E_0$, de $U$ on regarde l'action du semi groupe engendré par $T$ ce qui permettra de simplifier l'étude en ne regardant qu'une "portion" de l'opérateur $\St{T}{t}$.
+
+
+Pour montrer le résultat, nous allons utiliser les résultats de la section précédente. Mais pour ce faire, nous devons réécrire l'opérateur $U(t)$ sous la forme d'un opérateur intégral.
+
+\begin{lem}
+Il existe deux familles d'opérateurs $\{H(s',\tau, \epsilon) \, |\, s'\geq 0, \, \tau \geq 0, \epsilon \geq 0\}$ et $\{K(\tau, \epsilon) \, | \, \tau \geq 0, \epsilon \geq 0\}$ bornées sur $U$ à valeur dans $E_0$ tels que 
+\begin{equation}
+    U(\tau) = \St{\lambda_0}{\tau/\epsilon^2} + \int_0^{\tau} H(s',\tau - s', \epsilon) U(s') \dd s',
+\end{equation}
+avec
+\begin{equation}
+    H(s',\tau, \epsilon) = \St{H}{\tau/\epsilon^2}\Stt{H}{s'/\epsilon^2} K(\tau,\epsilon),
+\end{equation}
+et
+\begin{equation}
+    K(\tau, \epsilon) = \int_0^{\tau/\epsilon^2} \Stt{H}{x}A_\perp \St{H_1}{x}A^\perp \dd x.
+\end{equation}
+\end{lem}
+
+\begin{proof}
+En partant de (), puis en faisant une interversion d'intégrale (les intégrandes sont des opérateurs) puis un changement de variable dans l'intégrale interne $x = u -s$, puis un autre dans l'intégrale externe $s' = s\epsilon^2$ on a :
+\begin{eqnarray}
+    U(\epsilon^2t) &=&  \St{\lambda_0}{t} + \epsilon^2\int_0^t\int_0^s \St{H}{(t-s)}A_\perp \St{H_1}{(s-u)}A^\perp U(\epsilon^2u) \dd u \dd s \\
+                   &=&  \St{\lambda_0}{t} + \epsilon^2\int_0^t\St{H}{t}\int_s^t \Stt{H}{u}A_\perp \St{H_1}{(u-s)}A^\perp \dd u \;U(\epsilon^2s) \dd s \\
+                   &=&  \St{\lambda_0}{t} + \epsilon^2\int_0^t\St{H}{t}\Stt{H}{s}\int_0^{t-s} \Stt{H}{x}A_\perp \St{H_1}{x}A^\perp \dd x \; U(\epsilon^2s) \dd s \\
+                   &=&  \St{\lambda_0}{t} + \int_0^{\epsilon^2t}\St{H}{t}\Stt{H}{s'/\epsilon^2}\int_0^{t-s'/\epsilon^2} \Stt{H}{x}A_\perp \St{H_1}{x}A^\perp \dd x \; U(s') \dd s'.
+\end{eqnarray}
+ce qui prouve le résultat.
+\end{proof}
+
+Les notations ont été choisis de sorte à utiliser les propositions de la partie précédente facilement.
+
+\begin{ass}
+Nous allons supposer 
+\begin{equation}
+    \int_0^{+\infty} \lb\lb A_\perp \St{H_1}{x}A^\perp \rb\rb_{U'} dx < \infty.
+\end{equation}
+En particulier l'opérateur 
+\begin{equation}
+    K_l := \int_0^{\infty} \Stt{H}{x}A_\perp \St{H_1}{x}A^\perp \dd x
+\end{equation}
+est bien défini.
+\end{ass}
+
+On remarque alors que sous cette hypothèse, la suite de fonctions $\lp K_n : = K(\cdot,\f{1}{n+1}\rp$ de $[0,T]$ dans l'ensemble des opérateurs bornés de $U$ vérifie donc les hypothèses du lemme () pour tout $T>0$ dont la limite est $K_l$ qui ne dépend pas de $T$. On en déduit alors par ce lemme que la suite d'opérateur
+\begin{equation}
+    \mathcal{H}_n(T) : f\in V(T) \mapsto \tau\in[0,T] \mapsto \int_0^\tau \lp H(s,\tau - s, \f{1}{n+1}) - \St{H}{(\tau-s)(n+1)^2}\Stt{H}{s(n+1)^2} K_l \rp f(s) \dd s 
+\end{equation}
+converge fortement vers $0$ pour tout $T$, où $V(T)$ est l'espace des fonctions continues sur $[0,T]$ à valeurs dans $U$. Or on remarque que
+\begin{equation}
+    \tilde{\mathcal{H}}_n(T) : f\in V(T) \mapsto \tau\in[0,T] \mapsto \int_0^\tau \lp \St{H}{(\tau-s)(n+1)^2}\Stt{H}{s(n+1)^2} K_l \rp f(s) \dd s
+\end{equation}
+peut s'écrire en utilisant le fait que $K_l$ est à valeurs dans $E_0$ :
+\begin{eqnarray}
+    \tilde{\mathcal{H}}_n(T)f(\tau) &=& \int_0^\tau \St{H}{(\tau-s)(n+1)^2}\Stt{H}{s(n+1)^2} P K_l f(s)\dd s \\
+                                    &=& \St{\lambda_0}{\tau(n+1)^2}K_l \int_0^\tau \Stt{\lambda_0}{(2s)(n+1)^2} f(s) \dd s \\
+\end{eqnarray}
 
 
 
@@ -376,5 +602,7 @@ En utilisant successivement la formule de Cauchy, l'égalité définissant les m
 - Antoine Levitt : Schur Complement
 - Stephane Nonnenmacher : COurs de théorie Spectrale
 - Wikipédia %https://fr.wikipedia.org/wiki/R%C3%A8gle_d%27or_de_Fermi
+\cite{HOWLAND1975415}
+\printbibliography
 
 \end{document}
