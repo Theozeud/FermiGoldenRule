@@ -88,6 +88,8 @@
 \theoremstyle{definition}
 \newtheorem{ex}{Exemple}
 \theoremstyle{definition}
+\newtheorem{exs}{Exemples}
+\theoremstyle{definition}
 \newtheorem{rem}{Remarque}
 \newtheorem{postulat}{Postulat}
 \theoremstyle{definition}
@@ -127,23 +129,43 @@
 
 Développé dans les années par une dizaine de physiciens devenus célèbres dont notamment Paul Dirac, Werner Heisenberg, Louis de Broglie, Erwin Schrödinger etc.,  la mécanique quantique est la branche de la physique théorique qui permet d'expliquer le comportement des particules élémentaires, des atomes, des molécules ou de tout système physique de taille similaire. Elle a rencontré de nombreux succès en permettant d'expliquer ce que la physique classique ne pouvait pas, par exemple la structure électronique des atomes et des molécules, .... . 
 
-Nous ne prétendons pas ici à fournir ne serait-ce qu'une introduction d'introduction d'un vrai cours de mécanique quantique, et bon nombre de concepts et de résultats élémentaires seront omis. Pour plus de détails, nous renvoyons le lecteur à [], [] ou []. Nous allons nous concentrer sur ce que l'on appelle les postulats de la mécanique quantique qui permettent de poser les bases de la modélisation mathématique et de ses outils avec lesquels nous allons traiter tout au long de ce rapport.
+Nous ne prétendons pas ici à fournir ne serait-ce qu'une introduction d'introduction d'un vrai cours de mécanique quantique, et bon nombre de concepts et de résultats élémentaires seront omis. Pour plus de détails, nous renvoyons le lecteur à [], [] ou []. Nous allons juste nous concentrer sur ce que l'on appelle les postulats de la mécanique quantique qui permettent de poser les bases de la modélisation mathématique et de ses outils avec lesquels nous allons traiter tout au long de ce rapport.
 
 \vspace{3mm}
 \begin{tcolorbox}[colback=gray!5!white,
                   colframe=gray!80!white,
                   title= Postulat 1 : Principe de superposition ]
-L'état d'un système quantique est défini à tout instant $t$ par un vecteur unitaire, dénoté $|\psi(t)\rangle$, appartenant à un espace de Hilbert complexe $\HH$ séparable.
+L'état d'un système quantique est défini à tout instant $t$ par un vecteur unitaire, dénoté $|\psi(t)\rangle$, appartenant à un espace de Hilbert complexe $\HH$ séparable. Deux états qui différent d'un facteur de phase $e^{i\theta}$ pour $\theta\in[0,2\pi)$ représentent le même état.
 \end{tcolorbox}
 \vspace{3mm}
+
+\begin{exs}
+    Donnons quelques exemples d'espaces d'états.
+    \begin{enumerate}
+        \item[1] $\C$ est l'espace de Hilbert séparable le plus simple que l'on puisse considérer. Comme deux complexes de module 1 différent toujours d'un facteur de phase, cet espace est trivial puisque constituer que d'un seul état.
+        \item[2] $\C^2$ est quant à lui l'espace non trivial le plus simple que l'on puisse considérer. Soit $|\psi\rangle = (re^{i\vp}, r'e^{i\vp'}) \in \C^2$ avec $r,r'\geq 0$ et $\vp, \vp' \in [0,2\pi)$. Quitte à multiplier par le facteur de phase $e^{-i\vp}$ (qui ne change pas l'état du système, on peut supposer $\vp = 0$. Comme un vecteur d'état est de norme 1, on a que $r^2 + r'^2 = 1$ et il existe donc $\theta \in [0,2\pi[$, que l'on peut réduire à $\theta \in [0,\pi[$ une nouvelle fois par invariance par multiplication par un facteur de phase, tel que $|\psi\rangle = \lp \cos(\theta), \sin(\theta)e^{i\vp}\rp$. Une telle paramétrisation fait que l'on appelle cet espace d'état la sphère de Bloch, qui permet de modéliser par exemple les qubits, composants de base en thérie de l'information quantique.
+        \item[3] De même, on peut considérer $\C^n$ pour $n\in\N$. Un tel espace peut modéliser un système qui peut se déplacer/propager sur un ensemble de $n$ sites.
+        \item[4]  De façon plus général, si l'on souhaite considérer un système qui évolue sur une chaîne discrète infinie, l'espace approprié à considérer est $\ell^2(\Z)$, l'espace des suites sur $\Z$ de carré intégrable, qui est bien, muni sa norme euclidienne, un espace de Hilbert séparable. On peut aussi considérer $\ell^2(A)$ où $A$ est un ensemble dénombrable.
+        \item[5] Un dernier exemple est l'espace $L^2(\R^d,\C)$ où $d\in\N$, l'espace des fonctions de $R^d$ vers $\C$ de carré intégrable. Cet espace est un espace de Hilbert séparable pour sa norme euclidienne. C'est l'espace typique utiliser si l'on souhaite par exemple modéliser un système dont la position varie dans un continuum, ici $\R^d$.
+    \end{enumerate}
+\end{exs}
 
 \vspace{3mm}
 \begin{tcolorbox}[colback=gray!5!white,
                   colframe=gray!80!white,
                   title= Postulat 2 : Principe de correspondance ]
-
+A tout observable classique correspond un opérateur linéaire $A$ autoadjoint sur $\HH$.
 \end{tcolorbox}
 \vspace{3mm}
+
+\begin{rem}
+    $A$ est simplement une matrice si $\HH$ est de dimension finie mais peut être un opérateur possiblement non borné si $\HH$ est de dimension infinie. L'étude de tels opérateurs, et à l'instar des matrices de leur spectre et diagonalisabilité, fait l'objet de la théorie dite spectrale dont nous ferons un très rapide tour dans la section suivante. Ici autoadjoint est une généralisation à la dimension infinie de la notion d'hermitianité pour les matrices complexes.
+\end{rem}
+
+\begin{ex}
+    
+\end{ex}
+
 
 \vspace{3mm}
 \begin{tcolorbox}[colback=gray!5!white,
@@ -173,10 +195,22 @@ L'état d'un système quantique est défini à tout instant $t$ par un vecteur u
 \begin{tcolorbox}[colback=gray!5!white,
                   colframe=gray!80!white,
                   title= Postulat 6 : Evolution d'un système dans le temps ]
-
+Entre toute mesure, l'évolution de l'état d'un système quantique est régit par l'équation de Schrödinger 
+$\partial_t \psi(t) = H(t)\psi(t)$
+où $H(t)$ est l'opérateur correspondant à l'hamiltonien du système à l'instant $t$, i.e à l'observable "énergie total".
 \end{tcolorbox}
 \vspace{3mm}
 
+\begin{rem}
+    \begin{enumerate}
+        \item[1] L'opérateur $H$, correspondant à une observable classique, est un opérateur auto-adjoint.
+        \item[2] L'existence de solutions à un tel équation est donné par le théorème de Stone que nous verrons dans la section suivante sur les rappels de théorie spectrale.
+    \end{enumerate}
+\end{rem}
+
+\begin{exs}
+    
+\end{exs}
 
 \subsection{La règle d'or de Fermi} 
 
@@ -249,21 +283,17 @@ On a remplacé l'étude sur l'exponentielle de $\He$ en une étude de sa résolv
 \newpage
 \subsection{Matrice de Livsic}
 
-Considérons un opérateur $H$ auto-adjoint sur un espace de Hilbert $\HH$, $E_0$ un sous-espace vectoriel de dimension finie de $\HH$, et $P$ la projection orthogonal sur ce sous-espace. Comme expliquer plus haut, l'approche par les résonances consiste à se ramener à étudier la quantité impliquant la résolvante $R(z) := (H - z)\inv$ et la projection $P$  :
-\begin{equation}\label{compression}
-    P(H - z)\inv P
-\end{equation}
-où $z$ est un complexe. Cette quantité est comme la résolvante bien définie et holomorphe sur $\res H$. A l'instar des différents types de singularités en analyse complexe, cette quantité est méromorphe sur une certaine partie du spectre : le spectre discret. Pour rappel, le spectre discret $\spec_d H$ est l'ensemble des valeurs propres de multiplicité finie de $H$. La résolvante, et donc la compression (\ref{compression}), est donc méromorphe sur le spectre essentiel $\spec_{ess} H = \spec\setminus\spec_d H$. 
+Nous abordons dans cette partie la notion de matrice de Livsic qui a été introduite en 1957 par M.S Livsic [], et qui a été redécouvert de nombreuses fois sous différents noms par les physiciens. Il s'agit de la version infini-dimensionnelle de la notion complément de Schur dont nous ferons un parallèle dans la suite. Considérons un opérateur $H$ auto-adjoint sur un espace de Hilbert $\HH$, $E_0$ un sous-espace vectoriel de dimension finie de $\HH$, et $P$ la projection orthogonal sur ce sous-espace. La matrice de Livsic est un outil central pour l'approche par les résonances et de façon informel s'agit d'une matrice $B(z)$ dépendant de la variable complexe $z$ qui permet de réécrire la compression $P(H-z)\inv P = (B(z) -z)\inv$. Ainsi, en donnant une formule explicite à cette matrice, nous pourrons étudier de façon explicite le fait que l'on s'intéresse au bloc $(E_0,E_0)$ dans la décomposition $E_0\oplus E_0^\perp$ de la résolvante de $H$.
 
-La formule (\ref{compression}) n'est pas très explicite tel quel et signifie
+Faisons un petit rappel sur la résolvante notée $R(z) := (H-z)\inv$. Cette quantité est bien définie sur le complémentaire du spectre de $H$ et y ait holomorphe. A l'instar des différents types de singularités en analyse complexe, cette quantité est méromorphe sur une certaine partie du spectre : le spectre discret. Pour rappel, le spectre discret $\spec_d H$ est l'ensemble des valeurs propres de multiplicité finie de $H$. La résolvante est donc méromorphe sur le spectre essentiel $\spec_{ess} H = \spec H\setminus\spec_d H$. La compression $PR(z)P$ est donc aussi méromorhpe sur  $\spec_{ess} H$.
 
-On a la proposition suivante qui va nous permettre de définir la matrice de Livsic.
+Commençons par établir l'existence d'une telle matrice $B(z)$. Celle-ci repose sur le faire que la compression $PR(z)P$ est un opérateur de dimension finie, i.e une matrice, et la proposition suivante.
 
 \begin{prop}
     $PR(z)P$ est inversible pour $z\in\C\setminus\R$.
 \end{prop}
 \begin{proof}
-    Une remarque importante à faire est que $PR(z)P$ est un endomorphisme linéaire de $E_0$ qui est de dimension finie. Il suffit donc de montrer que cette quantité est injective. Soit $z = a+ib\in\C\setminus\R$ et $x\in E_0$ tel que $PR(z)Px = 0$. En particulier, on a 
+    D'après la remarque précédente, il suffit donc de montrer que cette quantité est injective. Soit $z = a+ib\in\C\setminus\R$ et $x\in E_0$ tel que $PR(z)Px = 0$. En particulier, on a 
 
     $$0 = \im\la x\,,\, PR(z)Px \ra = \im\la x\,,\, R(z)x \ra = b\lb\lb\lp (H-a)^2 + b^2 \rp^{-1/2}x\rb\rb^2$$
     car $x = Px$, et car $P$ et $H$ sont auto-adjoint. Comme $b$ est non nul, nécessairement $x = 0$.
@@ -274,7 +304,7 @@ Cela nous permet de définir la notion de matrice de Livsic.
 \begin{Def}[Matrice de Livsic]
 Pour $z\in \C\setminus\R$, on définit la matrice de Livsic par
 \begin{equation*}
-    B(z) = (PR(z)P)\inv + z
+    B(z) := (PR(z)P)\inv + z
 \end{equation*}
 qui vérifie l'identité 
 \begin{equation*}
