@@ -261,7 +261,16 @@ où $H(t)$ est l'opérateur correspondant à l'hamiltonien du système à l'inst
     
 \end{exs}
 
+\subsection{Perturbation}
+
+Nous présentons maintenant une autre notion beaucoup étudiée en mécanique quantique : les perturbations.
+En effet, en physique quantique, il arrive souvent que le système que l'on étudie sous soumis à une perturbation. Par exemple, si une particule, initialement libre, se retrouve soumise à un potentiel. Lorsque l'on parle de perturbation, il est souvent entendu qu'elle est petite, il s'agit vraiment d'une perturbation et est souvent facteur d'un réel positif $\epsilon$ pour contrôler l'amplitude de la perturbation.
+Concrètement, un perturbation signifie que notre hamiltonien de départ $H_0$ se retrouve remplacé par un nouvel hamiltonien $H(\epsilon) := H_0 + \epsilon H_1$ où $H_1$ est aussi un opérateur autoadjoint représentant la perturbation. Étant donné que les valeurs propres des opérateurs jouent un rôle centrale en mécanique, puisque pour rappel ceux sont les seules informations que l'on peut mesurer, il faut donc étudier les valeurs propres de l'hamiltonien perturbé. Plusieurs théories permettent de tels études selon les caractéristiques de la perturbation. On peut par exemple la théorie des perturbations classiques, souvent présenté en cours de physique, et les théories de Kato et de la diffusions, présentés dans des cours de théorie spectrale. Ce que l'on peut retenir, et c'est quelque chose à quoi on peut s'attendre, est que les valeurs propres de $H(\epsilon)$ sont celles de $H_0$ plus une quantité de l'ordre de $o(\epsilon)$. 
+
+
 \subsection{La règle d'or de Fermi} 
+
+Maintenant que nous avons rappelé les principes de la modélisation mathématique de la mécanique quantique, nous pouvons présenter le sujet de ce projet : la règle d'or de Fermi. 
 
 Qu'est ce que la règle d'or de Fermi ? A ce propos, Wikipédia [] dit efficacement ceci : \\
 
@@ -269,17 +278,10 @@ Qu'est ce que la règle d'or de Fermi ? A ce propos, Wikipédia [] dit efficacem
     "En physique quantique, la règle d'or de Fermi est un moyen de calculer le taux de transition (probabilité de transition par unité de temps) à partir d'un état propre énergétique d'un système quantique vers un continuum d'états propres, par perturbation."
 \end{it}\\
 
-Cette définition mérite un certains nombres d'explications que nous allons  prendre le temps de donner. 
 
 
 
-\paragraph{Pertubation}
-Expliquons maintenant ce que l'on entend par perturbation en phsyique quantitique. Il arrive souvent que le système que l'on étudie est soumise à une "petite" perturbation, c'est à dire que notre hamiltonien de départ se retrouve remplacé par un nouvel hamitonien $H(\epsilon) := H_0 + \epsilon H_1$ où $H_1$ est aussi un opérateur autoadjoint représentant la perturbation et $\epsilon$ un réel positif qui a vocation a être petit.  Par exemple, cela peut modéliser []. En présence de tels perturbations, les valeurs propres initiales peuvent se retouver pertuber, et la connaissance des valeurs propres étant fondamentales en phsyiqye quantique, des physiciens ont développé des théories pour calculer, étudier, caractérisé les valeurs propres perturbées et qui ont été reprises rigoureusement par des mathématiciens comme la théorie de Kato qui stipule de nombreux résultats selon la régularité des domaines des opérateurs $H_0$ et $H_1$. 
 
-\paragraph{Pertubation}
-
-
-En résumé, 
 
 \subsection{Objectifs de ce projet}
 
@@ -313,20 +315,21 @@ Il faut un cours entier de M2 pour établir les éléments introductifs de la th
 Intro pour dire pourquoi on s'intéresse à ca : e(iH), généralisation du spectre d'un opérateur T
 - Déf convergence forte généralisée
 
-\subsection{Schrodinger-equations}
+\subsection{Équations de Schrödinger}
 
 
 
 \newpage
 \section{Approche par les résonances}
 
-Dans cette partie, nous abordons l'approche dite par les résonances, dénomination que nous expliquerons dans la suite. Nous reprenons les notations fixées précédemment ([]). L'idée est d'utiliser les formules de Cauchy de théorie spectrale pour se ramener à un problème avec une intégrale complexe. Si $H_0$ est un opérateur bornée de $\mathcal{H}$ dans $\mathcal{H}$ alors son spectre est borné, plus précisément $\spec H_0 \subseteq \lc-||H_0||, ||H_0||\rcc$. La théorie des perturbations classique indique que le spectre de $H(\epsilon$ est "proche" du spectre de $H_0$ lorsque $\epsilon$ est petit. Il existe donc un contour $\Gamma$ dans $\C$ tel que $\spec H \subset int(\Gamma)$ où $int(\Gamma)$ est l'unique composante connexe bornée  de $\C\setminus \Gamma$. On écrit donc d'abord (voir []) :
+Dans cette partie, nous abordons l'approche dite par les résonances, dénomination que nous expliquerons dans la suite. Nous reprenons les notations fixées précédemment ([]). \\
 
+Rappelons que la quantité d'étude est la suivante : 
 \begin{equation}
-    \la \vp_0 | e^{-i\He t} \vp_0\ra = \f{1}{2i\pi}\oint_\Gamma e^{-itz}\la \varphi_0,\lp H(\epsilon)  -z \rp^{-1} \varphi_0 \ra dz.
+    \langle \vp_0 | e^{-iH_\epsilon t} \vp_0 \rangle
 \end{equation}
+Pour ce faire une première idée de comment procéder, regardons le cas lorsqu'il n'y a pas de perturbation, c'est à dire $\epsilon = 0$. 
 
-On a remplacé l'étude sur l'exponentielle de $\He$ en une étude de sa résolvante.
 
 \subsection{Matrice de Livsic}
 
@@ -435,7 +438,7 @@ En utilisant successivement la formule de Cauchy, l'égalité définissant les m
 
 \subsection{Orth's Theorem}
 
-\section{Second Approach : Davies's Theory}
+\section{Seconde approche : Théorie de Davies}
 
 \subsection{Système stable}
 
