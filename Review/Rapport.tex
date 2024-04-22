@@ -123,7 +123,7 @@
 
 \section{Introduction}
 
-\subsection{La mécanique quantique}
+\subsection{Modélisation mathématique de la mécanique quantique}
 
 Développé dans les années par une dizaine de physiciens devenus célèbres dont notamment Paul Dirac, Werner Heisenberg, Louis de Broglie, Erwin Schrödinger etc.,  la mécanique quantique est la branche de la physique théorique qui permet d'expliquer le comportement des particules élémentaires, des atomes, des molécules ou de tout système physique de taille similaire. Elle a rencontré de nombreux succès en permettant d'expliquer ce que la physique classique ne pouvait pas, par exemple la structure électronique des atomes et des molécules, .... . 
 
@@ -137,11 +137,16 @@ L'état d'un système quantique est défini à tout instant $t$ par un vecteur u
 \end{tcolorbox}
 \vspace{3mm}
 
+\begin{rem}
+    Il est usuel en mécanique quantique de noter un vecteur 
+    de $\HH$ aussi bien $\psi$ que $|\psi\rangle$. Il s'agit d'un "ket". En notant la forme linéaire associé à ce vecteur par $\langle\psi |$, i.e l'application $u\in\HH \mapsto \langle \psi | u\rangle$ appelé un "bra", on obtient que les notations coïncident avec le produit scalaire et sont très utiles en pratique. Par exemple, le projecteur sur la droite vectoriel engendrée par $|\psi\rangle$ est $|\psi\rangle\langle\psi |$.
+\end{rem}
+
 \begin{exs}
     Donnons quelques exemples d'espaces d'états.
     \begin{enumerate}
         \item[1] $\C$ est l'espace de Hilbert séparable le plus simple que l'on puisse considérer. Comme deux complexes de module 1 différent toujours d'un facteur de phase, cet espace est trivial puisque constituer que d'un seul état.
-        \item[2] $\C^2$ est quant à lui l'espace non trivial le plus simple que l'on puisse considérer. Soit $|\psi\rangle = (re^{i\vp}, r'e^{i\vp'}) \in \C^2$ avec $r,r'\geq 0$ et $\vp, \vp' \in [0,2\pi)$. Quitte à multiplier par le facteur de phase $e^{-i\vp}$ (qui ne change pas l'état du système, on peut supposer $\vp = 0$. Comme un vecteur d'état est de norme 1, on a que $r^2 + r'^2 = 1$ et il existe donc $\theta \in [0,2\pi[$, que l'on peut réduire à $\theta \in [0,\pi[$ une nouvelle fois par invariance par multiplication par un facteur de phase, tel que $|\psi\rangle = \lp \cos(\theta), \sin(\theta)e^{i\vp}\rp$. Une telle paramétrisation fait que l'on appelle cet espace d'état la sphère de Bloch, qui permet de modéliser par exemple les qubits, composants de base en thérie de l'information quantique.
+        \item[2] $\C^2$ est quant à lui l'espace non trivial le plus simple que l'on puisse considérer. Soit $|\psi\rangle = (re^{i\vp}, r'e^{i\vp'}) \in \C^2$ avec $r,r'\geq 0$ et $\vp, \vp' \in [0,2\pi)$. Quitte à multiplier par le facteur de phase $e^{-i\vp}$ (qui ne change pas l'état du système, on peut supposer $\vp = 0$. Comme un vecteur d'état est de norme 1, on a que $r^2 + r'^2 = 1$ et il existe donc $\theta \in [0,2\pi[$, que l'on peut réduire à $\theta \in [0,\pi[$ une nouvelle fois par invariance par multiplication par un facteur de phase, tel que $|\psi\rangle = \lp \cos(\theta), \sin(\theta)e^{i\vp'}\rp$. Une telle paramétrisation fait que l'on appelle cet espace d'état la sphère de Bloch, qui permet de modéliser par exemple les qubits, composants de base en théorie de l'information quantique.
         \item[3] De même, on peut considérer $\C^n$ pour $n\in\N$. Un tel espace peut modéliser un système qui peut se déplacer/propager sur un ensemble de $n$ sites.
         \item[4]  De façon plus général, si l'on souhaite considérer un système qui évolue sur une chaîne discrète infinie, l'espace approprié à considérer est $\ell^2(\Z)$, l'espace des suites sur $\Z$ de carré intégrable, qui est bien, muni sa norme euclidienne, un espace de Hilbert séparable. On peut aussi considérer $\ell^2(A)$ où $A$ est un ensemble dénombrable.
         \item[5] Un dernier exemple est l'espace $L^2(\R^d,\C)$ où $d\in\N$, l'espace des fonctions de $R^d$ vers $\C$ de carré intégrable. Cet espace est un espace de Hilbert séparable pour sa norme euclidienne. C'est l'espace typique utiliser si l'on souhaite par exemple modéliser un système dont la position varie dans un continuum, ici $\R^d$.
@@ -173,7 +178,14 @@ Donnons quelques exemples pour des systèmes vivant dans l'espace le plus intér
         = \int_{\R^d}\overline{x\psi_1(x)}\psi_2(x) \dd x 
         = \la X\psi_1, \psi_2\ra.
     \end{equation}
-    \item[2]
+    \item[2] De même, parler du moment (masse $\times$ vitesse) de l'électron n'a pas de sens. Quelle définition peut-on donner à l'opérateur $P$ correspondant ? L'idée naturelle est de poser que les quantités moyennes "vérifient" les principes classiques, ici que la dérivée de la position est égale au moment (en se plaçant dans un système d'unité où la masse $m$ de l'électron est telle que $m=1$ :
+    $$ \langle \psi |P|\psi\rangle = m\frac{\dd \langle \psi | X | \psi\rangle}{\dd t}.$$
+    \begin{theo}[Théorème d'Ehrenfest]
+        Si $A$ est un opérateur autoadjoint de $\HH$ indépendant du temps, alors pour tout $\psi\in\HH$
+        \begin{equation}
+            \frac{\dd \langle \psi | A | \psi\rangle}{\dd t} = \psi | A | \psi\rangle
+        \end{equation}
+    \end{theo}
 \end{enumerate}
 \end{ex}
 
@@ -190,22 +202,43 @@ Quelque soit l'état du système, la mesure d'une observable $A$ ne peut être q
     Lorsque l'on parle ici de mesure, il s'agit bien là d'une mesure physique réalisé à l'aide d'instruments et sous intervention humaine, ce qui est un point déroutant en mécanique quantique. 
 \end{rem}
 
+\begin{rem}
+    Une remarque importante doit être faite concernant le spectre des opérateurs. S'il est aisé d'étudier le spectre des matrices, étudier le spectre d'opérateur de dimension infinie et possiblement non borné est beaucoup plus délicat et se traite dans des cours de théorie spectrale. Dans la section suivante, nous passerons en revue les résultats principaux sans pour autant les justifier. Donnons ici quelques aperçus. Ce qui fait que l'analyse spectrale en dimension infinie est beaucoup plus délicate et due au fait de la présence de phénomènes complètement absents en dimension finie. Déjà, une première difficulté vient de la définition du spectre. Le spectre d'une matrice carré $M$ peut être définie comme l'ensemble des complexes tel que $M-z$ ne soit pas inversible. C'est aussi équivalent à demander que $M-z$ ne soit pas subjective, ou encore pas injective. En dimension infinie, aucune des ces définitions n'est équivalentes. Le spectre est donc constitué de plusieurs parties, chacun correspondant à une facette du problème qui empêche $H-z$ d'être inversible (et d'inverse borné). Une partie de ce spectre, noté , $\sigma(H)$ressemble à celui que l'on connaît en dimension finie : les valeurs propres de multiplicité finie, constituant le spectre dit discret et noté $\sigma_d(H)$. Mais il y a aussi les valeurs propres de multiplicité infinie qui corresponde au cas d'un point d'accumulation. Les valeurs propres empêchent $H-z$ d'être injective. Une partie du spectre empêche cette quantité d'être surjective et dedans comprend un spectre continue, par exemple un intervale de $\R$
+\end{rem}
+
+\begin{exs}
+    Donnons plusieurs exemples.
+    \begin{enumerate}
+        \item[1] matrix
+        \item[2] position
+        \item[3] combinaison spin rd 
+    \end{enumerate}
+\end{exs}
 
 \vspace{3mm}
 \begin{tcolorbox}[colback=gray!5!white,
                   colframe=gray!80!white,
                   title= Postulat 4 : Principe de décomposition spectrale ]
-
+La mesure d'une observable $A$ est une variable aléatoire dont la loi est donnée par $$\mathbb{P}(\text{mesurer} \in E) = ||P_A(E)\psi||^2$$
+où $E$ est un borélien de $\HH$ (où la topologie est celle induite par la norme) et $P_A$ la mesure spectrale de l'opérateur $A$.  
 \end{tcolorbox}
 \vspace{3mm}
+
+\begin{rem}
+    La formulation rigoureuse donnée dans ce postulat diverge quelque peu de celles que l'on peut trouver généralement dans des livres de physiques qui se concentrent avec des formulations plus simples mais moins clair mathématiquement. Pour cause, la notion de mesure spectrale est une notion dont les résultats sous-jacent demandent pas mal de travail. Encore une fois, nous référons à la section suivante pour un rappel de théorie spectrale. Expliquons toutefois intuitivement ce qu'est la mesure spectrale d'un opérateur.
+\end{rem}
 
 \vspace{3mm}
 \begin{tcolorbox}[colback=gray!5!white,
                   colframe=gray!80!white,
                   title= Postulat 5 : Principe de réduction du paquet d’onde ]
-Immédiatement après une mesure de l'observable $A$, si la mesure est $a$
+Immédiatement après une mesure de l'observable $A$, l'état du système est donnée par la formule $\f{P_A(E)\psi}{||P_A(E)\psi||}$.
 \end{tcolorbox}
 \vspace{3mm}
+
+\begin{rem}
+    Encore une fois, l'expérience de la mesure modifie le système quantique. Le postulat précédent dit que le système se retrouve projeté dans le sous-espace propre généralisé. 
+\end{rem}
 
 \vspace{3mm}
 \begin{tcolorbox}[colback=gray!5!white,
@@ -238,10 +271,7 @@ Qu'est ce que la règle d'or de Fermi ? A ce propos, Wikipédia [] dit efficacem
 
 Cette définition mérite un certains nombres d'explications que nous allons  prendre le temps de donner. 
 
-\paragraph{Spectre continue}
-Comme nous l'avons rappelé, tout système quantique est régit par un opérateur linéaire, appelé Hamiltonien et noté $H$, auto-adjoint. Cet opérateur peut agir soit sur des espaces  de dimension fini, dans ce cas $H$ est simplement une matrice, ou des espaces de dimension infinies, à tire d'exemple citons le Laplacien agissant sur $H^2(\R^3)$. Les grandeurs qui peuvent être mesurées sur ce systèmes sont les valeurs propres de cet opérateur, le système se projetant alors sur le sous-espace propre associé. S'il est aisé d'étudier le spectre de matrice, étudier le spectre d'opérateur de dimension infini est plus délicat et se traire dans des cours de Théorie Spectrale. Nous renvoyons en annexe à quelques définitions et grands principes de la théorie spectrale et supposerons que le lecteur a connaissance des notions abordés dans l'annexe. Il est important de noter que la théorie spectrale en dimension infinie est certes plus général que celle de la dimension finie, mais implique nombre de résultats et de notions plus délicates qui sont complètement absents du monde fini-dimensionnel et qui ne peuvent donc pas être "intuité". Illustrons cela.
-- spectre opérateur compact, opérateurs continues -> cela vient du fait que différence injective <=> bijective <=> surhective
-L'hamiltonien $H$ possède la propriété d'être auto-adjoint. Il s'agit là d'une généralisation d'être symétrique pour des matrices réelles ou hermitiennes pour des matrices complexes. Il est possible de montrer qu'il est possible de daignoliser, dans un sens généraliser, tout opérateurs auto-adjoints, dont les valeurs propres sont alors réelles. Nous renvoyons encore ici à l'annexe pour plus de détails. Cette hypothèse qui vient des physiciens est assea naturel si l'on cherche à faire les postulats [] et [].
+
 
 \paragraph{Pertubation}
 Expliquons maintenant ce que l'on entend par perturbation en phsyique quantitique. Il arrive souvent que le système que l'on étudie est soumise à une "petite" perturbation, c'est à dire que notre hamiltonien de départ se retrouve remplacé par un nouvel hamitonien $H(\epsilon) := H_0 + \epsilon H_1$ où $H_1$ est aussi un opérateur autoadjoint représentant la perturbation et $\epsilon$ un réel positif qui a vocation a être petit.  Par exemple, cela peut modéliser []. En présence de tels perturbations, les valeurs propres initiales peuvent se retouver pertuber, et la connaissance des valeurs propres étant fondamentales en phsyiqye quantique, des physiciens ont développé des théories pour calculer, étudier, caractérisé les valeurs propres perturbées et qui ont été reprises rigoureusement par des mathématiciens comme la théorie de Kato qui stipule de nombreux résultats selon la régularité des domaines des opérateurs $H_0$ et $H_1$. 
@@ -255,6 +285,7 @@ En résumé,
 
 Comme nous l'avons dit, la règle d'or de Fermi est un résulta bien connue des physiciens. Toutefois, les preuves que l'on peut trouver dans des livres de physiques reposent souvent sur des hypothèses pas toujours claires voire douteuse. A tire d'exemple, Wikipédia [] propose une preuve dans le paragraphe qui fait une hypothèse qui n'est pas clair. Les mathémaciens, comme souvent, ont cherché à justifier rigoureussement les assertions des physiciens et sont parvenu à établir des résultats sur la règle d'or de Fermi. L'objectif de ce projet est donc d'étudier différentes preuves permettant d'établir la règle d'or de Fermi. Nous investigureons deux approches très différents, une dite par les résonnances, qui reposent sur de nombreux concepts de théorie spectrale, et sur l'approche de Davies qui repose sur l'étude d'un problème d'évolution. Nous chercherons à expliciter et simplifier ces démonstrations  dans le cas de systèmes quantiques simples ainsi qu'à comparer ces deux approches. Nous proposons aussi l'étude de [dimension finie]. 
 
+\newpage
 \section{Très brève introduction de théorie Spectrale}
 
 Pour étudier la règle d'or de Fermi, et les problèmes de mécaniques quantiques en général, les mathématiciens ont recours à une théorie fondamentale : la théorie spectrale. Cette théorie a pour but d'étudier le comportement d'opérateurs linéaires sur des espaces de Hilbert ou de Banach potentiellement (et surtout ) de dimension infinie, et de leurs spectres, généralisant les études bien connues sur les matrices, opérateur de dimension finie. 
@@ -296,7 +327,7 @@ Dans cette partie, nous abordons l'approche dite par les résonances, dénominat
 \end{equation}
 
 On a remplacé l'étude sur l'exponentielle de $\He$ en une étude de sa résolvante.
-\newpage
+
 \subsection{Matrice de Livsic}
 
 Nous abordons dans cette partie la notion de matrice de Livsic qui a été introduite en 1957 par M.S Livsic \cite{HOWLAND1975415}, et qui a été redécouvert de nombreuses fois sous différents noms par les physiciens. Il s'agit de la version infini-dimensionnelle de la notion complément de Schur dont nous ferons un parallèle dans la suite. Considérons un opérateur $H$ auto-adjoint sur un espace de Hilbert $\HH$, $E_0$ un sous-espace vectoriel de dimension finie de $\HH$, et $P$ la projection orthogonal sur ce sous-espace. La matrice de Livsic est un outil central pour l'approche par les résonances et de façon informel s'agit d'une matrice $B(z)$ dépendant de la variable complexe $z$ qui permet de réécrire la compression $P(H-z)\inv P = (B(z) -z)\inv$. Ainsi, en donnant une formule explicite à cette matrice, nous pourrons étudier de façon explicite le fait que l'on s'intéresse au bloc $(E_0,E_0)$ dans la décomposition $E_0\oplus E_0^\perp$ de la résolvante de $H$.
