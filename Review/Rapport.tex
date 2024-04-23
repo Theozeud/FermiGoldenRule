@@ -56,6 +56,7 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\HH}{\mathcal{H}}
+\newcommand{\KK}{\mathcal{K}}
 \newcommand{\spec}{\operatorname{spec}}
 \newcommand{\res}{\operatorname{res}}
 \newcommand{\specp}{\operatorname{spec_p}}
@@ -72,6 +73,7 @@
 \newcommand{\im}{\operatorname{Im}}
 \newcommand{\pvm}{\mathrm{d}\langle \rangle}
 \newcommand{\suminf}[2]{\sum_{#1=#2}^{+\infty}}
+\newcommand{\limeo}{\lim\limits_{\epsilon \rightarrow 0^+}}
 
 %new sections
 \newtheorem{Def}{Définition}
@@ -261,7 +263,7 @@ où $H(t)$ est l'opérateur correspondant à l'hamiltonien du système à l'inst
     
 \end{exs}
 
-\subsection{Perturbation}
+\subsection{Perturbations}
 
 Nous présentons maintenant une autre notion beaucoup étudiée en mécanique quantique : les perturbations.
 En effet, en physique quantique, il arrive souvent que le système que l'on étudie sous soumis à une perturbation. Par exemple, si une particule, initialement libre, se retrouve soumise à un potentiel. Lorsque l'on parle de perturbation, il est souvent entendu qu'elle est petite, il s'agit vraiment d'une perturbation et est souvent facteur d'un réel positif $\epsilon$ pour contrôler l'amplitude de la perturbation.
@@ -322,16 +324,49 @@ Intro pour dire pourquoi on s'intéresse à ca : e(iH), généralisation du spec
 \newpage
 \section{Approche par les résonances}
 
-Dans cette partie, nous abordons l'approche dite par les résonances, dénomination que nous expliquerons dans la suite. Nous reprenons les notations fixées précédemment ([]). \\
+Dans cette partie, nous abordons l'approche dite par les résonances, dénomination que nous expliquerons dans la suite. Pour ce faire, nous commençons par expliquer les grandes lignes de cette approche.
+Rappelons les notations. Soit $H(\epsilon)$ un hamiltonien dépendant du paramètre réel positif $\epsilon$ qui est somme d'un hamiltonien initial $H_0$ et d'une perturbation $\epsilon H_1$. On suppose que l'état initial est un vecteur propre $\vp_0$ unitade $H_0$ associé à une valeur propre $\lambda_0$ de multiplicité finie $m$. Si on note $\mathcal{K}_0$, le sous-espace propre associée, on peut écrire une décomposition de $H(\epsilon)$ dans $\mathcal{K}_0 \oplus \mathcal{K}_0^\perp$ : 
+$$H(\epsilon) := 
+\underbrace{\begin{pmatrix}
+\lambda_0I_m & 0 \\
+0    & A 
+\end{pmatrix}}_{H_0} \,+\, \epsilon
+\underbrace{\begin{pmatrix}
+B        & \Gamma \\
+\Gamma^* &  C
+\end{pmatrix}}_{H_1}$$
+où $A$, $B$ et $C$ sont des opérateurs auto-adjoints respectivement de $\mathcal{K}_0^\perp$, $\mathcal{K}_0$ et $\mathcal{K}_0^\perp$, et où $\Gamma$ est une forme linéaire bornée de $\mathcal{K}_0^\perp$ vers $\mathcal{K}_0$. Notons que $\lambda_0\notin\sigma(A)$. 
 
-Rappelons que la quantité d'étude est la suivante : 
+Rappelons aussi que la quantité d'étude qui nous intéresse est la suivante : 
 \begin{equation}
-    \langle \vp_0 | e^{-iH_\epsilon t} \vp_0 \rangle
+    \mid \langle \vp_0 | e^{-iH_\epsilon t} \vp_0 \rangle\mid^2
 \end{equation}
-Pour ce faire une première idée de comment procéder, regardons le cas lorsqu'il n'y a pas de perturbation, c'est à dire $\epsilon = 0$. 
+où $t\in\R^+$. L'approche par les résonances consiste à remplacer l'étude de l'exponentielle de l'opérateur $H(\epsilon)$ par l'étude de sa résolvante en utilisant l'information cruciale, portée par $\langle \vp_0 | \cdots |\vp_0 \rangle$,  que l'on regarde le bloc $(\mathcal{K}_0,\mathcal{K}_0)$, ce qui donnera une résolvante modifiée que nous étudierons dans la sous-section \ref{matrice_livsic}. Les résonances sont en fait les pôles de cette résolvante modifiée. Pour opérer à cette transformation, nous allons avoir recours à la formule de Stone rappelée plus haut ().\\
 
+Pour ce faire une première idée de comment procéder, regardons le cas lorsqu'il n'y a pas de perturbation, c'est à dire $\epsilon = 0$. Comme $\phi_0$ est un vecteur propre de $H_0$ pour la valeur propre $\lambda_0$, le calcul est immédiat et on trouve 
+\begin{equation}
+    \mid \langle \vp_0 | e^{-iH_0t} \vp_0 \rangle\mid^2 = |e^{-i\lambda_0t}|^2 = 1.
+\end{equation}
+Le résultat est logique puisque en l'absence de perturbation $\KK_0$ est un sous-espace stable et il n'y a donc aucun moyen d'aller rejoindre d'autres valeurs propres; il y a donc une probabilité $1$ de rester dans le même état. Traité tel quel, le cas sans perturbation ne nous apprend rien de comment traiter le cas avec perturbation. Complexifions alors artificiellement l'approche en faisant apparaître la mesure spectrale de $H_0$, notée $E_0$. Pour ce faire, il suffit de remarque que $P = E_0(\{\lambda_0\})$. La formule de Stone nous donne alors que 
+\begin{eqnarray*}
+    \mid \langle \vp_0 | e^{-iH_0t} \vp_0 \rangle\mid^2 &=&\mid \langle \vp_0 | e^{-iH_0t}E_0(\{\lambda_0\}) \vp_0 \rangle\mid^2
+    \\ &=& \limeo \mid \langle \vp_0 | \epsilon\im\lp H_0 - \lambda_0 - i\epsilon\rp\inv \vp_0 \rangle\mid^2 \\
+    &=& \limeo \mid \langle \vp_0 | \epsilon\im\lp \lambda_0 I_m - \lambda_0 - i\epsilon\rp\inv \vp_0 \rangle\mid^2 \\
+    &=&  \limeo \mid \langle \vp_0 | \epsilon\im\lp - i\epsilon\rp\inv \vp_0 \rangle\mid^2\\
+    &=&  \mid \langle \vp_0 | \vp_0 \rangle\mid^2 = 1.
+\end{eqnarray*}
+Pour passer de la deuxième ligne à la troisième ligne, on a utilisé le fait que l'inverse d'un opérateur par bloc est l'opérateur par bloc des inverses. 
+Pour généraliser cette approche, on fait face à trois difficultés :
+\begin{enumerate}
+    \item[1] La difficulté la plus simple à surmonter concerne le passage de la deuxième ligne à la troisième ligne : l'opérateur perturbé n'étant pas diagonal par bloc, il nous faudra étudier quelle est l'expression du de sa résolvante sur le bloc $(\KK_0,\KK_0)$, ce que nous faisons ci-après (\ref{matrice_livsic}).
+    \item[2] Deuxièmement, si l'information du bloc $(\KK_0,\KK_0)$ pour $H_0$ est concentrée dans la valeur propre $\lambda_0$, sous l'effet de la perturbation, cette valeur propre se modifie et peut se démultiplier en plusieurs valeurs propres de multiplicité inférieur. Pire encore, il peut y avoir de la perte de multiplicité avec une évanescence de la valeur propre vers les valeurs complexes. Ainsi, nous serons amené à regarder la mesure spectrale non pas en $\lambda_0$ mais sur un intervalle $J(\epsilon)$ qui diminue vers le singleton $\{\lambda_0\}$ quand $\epsilon$ tend vers $0$.
+    \item[3] Enfin, pour utiliser la formule de Stone, nous devons faire apparaître la mesure spectrale de $H(\epsilon)$ alors que celle qui apparaît naturellement est celle de $H_0$. Pour pallier à ce problème nous aurons recours à des théorèmes dits de concentration spectrale qui forment l'argument principale de la démonstration de la règle d'or de Fermi. En outre ces théorèmes, dont nous donnerons plusieurs versions selon les hypothèses du problème, énoncent que $st-\limeo E_\epsilon(J(\epsilon)) = E_0(\{\lambda_0\}) = P$. Nous verrons cela dans la sous-section $\ref{concentration}$
+\end{enumerate}
 
-\subsection{Matrice de Livsic}
+Question : Utiliser une intégrale de contour plutôt que la formule de Stone ?
+
+\newpage
+\subsection{Matrice de Livsic}\label{matrice_livsic}
 
 Nous abordons dans cette partie la notion de matrice de Livsic qui a été introduite en 1957 par M.S Livsic \cite{HOWLAND1975415}, et qui a été redécouvert de nombreuses fois sous différents noms par les physiciens. Il s'agit de la version infini-dimensionnelle de la notion complément de Schur dont nous ferons un parallèle dans la suite. Considérons un opérateur $H$ auto-adjoint sur un espace de Hilbert $\HH$, $E_0$ un sous-espace vectoriel de dimension finie de $\HH$, et $P$ la projection orthogonal sur ce sous-espace. La matrice de Livsic est un outil central pour l'approche par les résonances et de façon informel s'agit d'une matrice $B(z)$ dépendant de la variable complexe $z$ qui permet de réécrire la compression $P(H-z)\inv P = (B(z) -z)\inv$. Ainsi, en donnant une formule explicite à cette matrice, nous pourrons étudier de façon explicite le fait que l'on s'intéresse au bloc $(E_0,E_0)$ dans la décomposition $E_0\oplus E_0^\perp$ de la résolvante de $H$.
 
@@ -403,10 +438,19 @@ Pour tout $z\in\C\setminus\sigma_{ess}(H)$, on a
 Le lien entre les valeurs propres de $B(z)$ et celles de $H$ est donné dans la proposition suivante.
 
 \begin{prop}
-    
+Lien avev valeurs propres de $H$    
 \end{prop}
 
-\subsection{Théorème de Howland}
+\begin{ex}
+    Pour le cas (), nous avons $B(\epsilon,z) = \lambda_0 I_m - \epsilon^2\Gamma(A-z)\inv\Gamma^*$.
+\end{ex}
+
+
+\subsection{Théorème de Concentration spectrale}\label{concentration}
+
+Expliquer le split des valeurs propres et le théorème de concentration spectrale.
+
+\subsubsection{Théorème de Howland}
 
 Dans son article intitulé \textit{The Livsic  Matrix in Perturbation Theory}, James S. Howland propose en 1975 un théorème de concentration spectrale intéressant, sous l'hypothèse relativement forte mais qui est souvent vérifiée : la possibilité d'effectuer un prolongement analytique de la matrice de Livisc du plan complexe supérieur vers le plan complexe inférieur.
 
@@ -421,11 +465,18 @@ $$ J_k(n) = \bigcup_{k=1}^m (\lambda_k(n) - \delta_k(n),\lambda_k(n) + \delta_k(
 \end{theo}
 
 \begin{proof}
-Commençons par prouver l'existence des zéros. Par hypothèse, on a que la suite de matrices $(B_n(z))$ converge uniformément sur $\Omega$ vers $B(z)$, ce qui implique, en combinant au fait que le déterminant est continue, que pour $n$ assez grand et tout $z\in\Omega$, $$ |\det (B_n^+(z) - z) - \det (B(z) - z)| < \epsilon = |\det (B(z) - z)| $$ car $|B_n^+(z) - z - (B(z) - z)| \leq ||B_n - B|| \rightarrow 0$. Ceci étant vrai pour tout $z\in\Omega$, ceci est vrai pour tout $z\in\gamma$ où $\gamma$ est un chemin inclu dans $\Omega$ et entourant $\lambda_0$. Comme $\lambda_0$ est l'unique zéro et de multiplicité $m$ de $\det (B(z) - z)$, par théorème de Rouché [], l'équation $\det(B_n^+(z) -z) = 0$ a exactement $m$ solutions comptées avec multiplicité.
+Commençons par prouver l'existence des zéros. Par hypothèse, on a que la suite de matrices $(B_n(z))$ converge uniformément sur $\Omega$ vers $B(z)$, ce qui implique, en combinant au fait que le déterminant est continue, que pour $n$ assez grand et tout $z\in\Omega$, $$ |\det (B_n^+(z) - z) - \det (B(z) - z)| < \epsilon = |\det (B(z) - z)| $$ car $|B_n^+(z) - z - (B(z) - z)| \leq ||B_n - B|| \rightarrow 0$. Ceci étant vrai pour tout $z\in\Omega$, ceci est vrai pour tout $z\in\gamma$ où $\gamma$ est un chemin inclus dans $\Omega$ et entourant $\lambda_0$. Comme $\lambda_0$ est l'unique zéro et de multiplicité $m$ de $\det (B(z) - z)$, par théorème de Rouché, l'équation $\det(B_n^+(z) -z) = 0$ a exactement $m$ solutions comptées avec multiplicité.
 
 \end{proof}
 
 \newpage
+
+\subsubsection{Théorème de Orth}
+
+\subsection{Preuve de la règle d'or de Fermi}
+
+
+\subsection{Étude du passage de la dimension finie vers la dimension infinie}
 
 \begin{proof}
 En utilisant successivement la formule de Cauchy, l'égalité définissant les matrices de Livsic, 
@@ -434,9 +485,6 @@ En utilisant successivement la formule de Cauchy, l'égalité définissant les m
 &=& \f{1}{2i\pi}\oint_\Gamma e^{-itz} \lp B(z,\epsilon) -z)^{-1} - (B_n(z,\epsilon)-z)^{-1} \rp dz
 \end{eqnarray*}
 \end{proof}
-
-
-\subsection{Orth's Theorem}
 
 \section{Seconde approche : Théorie de Davies}
 
@@ -637,6 +685,9 @@ peut s'écrire en utilisant le fait que $K_l$ est à valeurs dans $E_0$ :
 - Stephane Nonnenmacher : COurs de théorie Spectrale
 - Wikipédia %https://fr.wikipedia.org/wiki/R%C3%A8gle_d%27or_de_Fermi
 \cite{HOWLAND1975415}
+\cite{Levitt}
+\cite{Orth1990}
+\cite{Macher}
 \printbibliography
 
 \end{document}
