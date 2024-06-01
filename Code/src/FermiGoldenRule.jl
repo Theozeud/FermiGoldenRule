@@ -21,7 +21,7 @@ module FermiGoldenRule
     export create_matrix
     include("model.jl")
 
-    export animation, plot_proba_l2Z
+    export animation, plot_proba_l2Z, plot_compoC, plot_simu
     include("plot.jl")
 
 end
