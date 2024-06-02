@@ -26,7 +26,7 @@ Nmax = 25                   # Upper bound of the lattice
 Nmin = - Nmax               # Lower bound of the lattice
 Lattice = Nmin:Nmax         # Definition of the discrete lattice
 Nₜ = 2500                    # Definition of the number of timestep
-T = 25                      # Duration of the simulation
+T = 100                     # Duration of the simulation
 timeT = LinRange(0,T,Nₜ+1)   # Time Lattice
 
 # Initial condition on the lattiche
@@ -44,7 +44,7 @@ ArrayEsol= [dynamics(h(E,ϵ,R₀,Nmax,-Nmax), ϕ₀fun, (C,L2Z(Nmin,Nmax)); Nₜ
 println("Dynamics computed !")
 
 probaE = [proba(ϕ₀,sol) for sol in ArrayEsol]
-plt = plot(size = (900,600), margin = 1Plots.cm, legendfontsize=14, legend = :bottomleft, titlefontsize=14,
+plt = plot(size = (900,600), margin = 1Plots.cm, legendfontsize=14, legend = :bottomright, titlefontsize=14,
 guidefontsize=14, tickfontsize=14)
 for (proba,E) in zip(probaE, ArrayE)
     plot!(plt, timeT,proba, label = latexstring("E = ",E),lw = 5) 
@@ -52,7 +52,7 @@ end
 xlabel!(L"t")
 ylabel!(L"|⟨ϕ_0,ϕ(t)⟩|^2")
 title!("Règle d'or de Fermi selon la valeur de E pour la chaine 1D pour ϵ = "*string(ϵ))
-savefig(plt,"image/Règle d'or de Fermi pour la chaine 1D pour ϵ = 0,1")
+savefig(plt,"image/Règle d'or de Fermi pour la chaine 1D pour ϵ = 0,1 long time")
 
 println("Plot saved !")
 

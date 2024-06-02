@@ -19,8 +19,8 @@ z₀ = 1.0
 
 # Choice of model parameters
 const R₀ = 0
-E = 0.2
-ϵ = 0.5
+E = 0.0
+ϵ = 0.1
 
 # Parameters for the approximation
 Nmax = 25                   # Upper bound of the lattice
@@ -39,7 +39,7 @@ sol = dynamics(h(E, ϵ, R₀, Nmax, Nmin), ϕ₀fun, (C,L2Z(Nmin,Nmax)); T = T, 
 # To find the coefficient Γ(ϵ), we minimze the function equal to the solution minus exp(-2Γ(ϵ)tϵ^2)
 
 # Loss function
-loss(Γ, sol, time) = norm(sqeuclidean(proba(ϕ₀,sol),exp.(-Γ[1].*time*ϵ^2)))^2
+loss(Γ, sol, time) = norm(sqeuclidean(proba(ϕ₀,sol),exp.(-2*Γ[1].*time*ϵ^2)))^2
 
 # Init guess for the optimization
 Γ₀ = 1.0
