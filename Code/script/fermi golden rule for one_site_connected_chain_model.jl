@@ -26,7 +26,7 @@ Nmax = 25                   # Upper bound of the lattice
 Nmin = - Nmax               # Lower bound of the lattice
 Lattice = Nmin:Nmax         # Definition of the discrete lattice
 Nₜ = 2500                    # Definition of the number of timestep
-T = 100                     # Duration of the simulation
+T = 25                      # Duration of the simulation
 timeT = LinRange(0,T,Nₜ+1)   # Time Lattice
 
 # Initial condition on the lattiche
@@ -37,7 +37,7 @@ timeT = LinRange(0,T,Nₜ+1)   # Time Lattice
 # Computation of the dynamics for different E and fixed ϵ
 println("Beginning of the Fermi's Golden rule for the 1 site connected 1D chain model")
 
-ϵ = 0.1
+ϵ = 0.0
 ArrayE = 0.0:0.5:4.0
 ArrayEsol= [dynamics(h(E,ϵ,R₀,Nmax,-Nmax), ϕ₀fun, (C,L2Z(Nmin,Nmax)); Nₜ = Nₜ, T = T) for E in ArrayE]
 
@@ -52,7 +52,7 @@ end
 xlabel!(L"t")
 ylabel!(L"|⟨ϕ_0,ϕ(t)⟩|^2")
 title!("Règle d'or de Fermi selon la valeur de E pour la chaine 1D pour ϵ = "*string(ϵ))
-savefig(plt,"image/Règle d'or de Fermi pour la chaine 1D pour ϵ = 0,1 long time")
+savefig(plt,"image/Règle d'or de Fermi pour la chaine 1D pour ϵ = 0")
 
 println("Plot saved !")
 
