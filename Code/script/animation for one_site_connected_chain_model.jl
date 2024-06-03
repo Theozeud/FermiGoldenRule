@@ -18,13 +18,13 @@ z₀ = 1.0
 
 # Choice of model parameters
 const R₀ = 0
-E = 0.2
+E = 0.0
 ϵ = 0.5
 
 # Parameters for the approximation
-Nmax = 25                   # Upper bound of the lattice
+Nmax = 10                   # Upper bound of the lattice
 Nmin = - Nmax               # Lower bound of the lattice    
-Nₜ = 2500                    # Definition of the number of timestep
+Nₜ = 250                     # Definition of the number of timestep
 T = 25                      # Duration of the simulation
 timeT = LinRange(0,T,Nₜ+1)   # Time Lattice
 
@@ -33,5 +33,5 @@ sol = dynamics(h(E, ϵ, R₀, Nmax, Nmin), ϕ₀fun, (C,L2Z(Nmin,Nmax)); T = T, 
 
 # Animation
 info = (Nmax = Nmax, Nmin = Nmin)
-animation(plot_simu, sol; trace =  true, d = 10, info = info)
+animation(plot_simu, sol; trace =  true, d = 5, info = info)
 
