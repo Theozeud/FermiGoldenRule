@@ -18,11 +18,11 @@ z₀ = 1.0
 
 # Choice of model parameters
 const R₀ = 0
-E = 0.0
-ϵ = 0.5
+E = 0.1
+ϵ = 0.0
 
 # Parameters for the approximation
-Nmax = 10                   # Upper bound of the lattice
+Nmax = 65                   # Upper bound of the lattice
 Nmin = - Nmax               # Lower bound of the lattice    
 Nₜ = 250                     # Definition of the number of timestep
 T = 25                      # Duration of the simulation

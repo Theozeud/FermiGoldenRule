@@ -48,7 +48,7 @@ function animation(funplot::Base.Callable, ψ; d::Real = 5, fps::Int = 30, trace
 
   function plot_compoC(Φ::Number, t::Union{Real,Nothing} = nothing)
 
-    _title = t!= nothing ? latexstring("⟨Φ_0,ϕ( ",t," )⟩") : ti = L"⟨ψ_0,ϕ⟩"
+    _title = t!= nothing ? latexstring("⟨ϕ_0,ϕ( ",t," )⟩") : ti = L"⟨ϕ_0,ϕ(t)⟩"
     plt = plot(title = _title, size=(350,350),legend=false,framestyle=:origin)
 
     #Plot Unit circle
