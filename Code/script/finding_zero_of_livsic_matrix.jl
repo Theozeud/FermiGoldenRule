@@ -23,10 +23,10 @@ E = 0.0
 ϵ = 0.1
 
 # Parameters for the approximation
-Nmax = 25                   # Upper bound of the lattice
+Nmax = 100                  # Upper bound of the lattice
 Nmin = - Nmax               # Lower bound of the lattice    
 Lattice = Nmin:Nmax         # Definition of the discrete lattice
-Nₜ = 2500                    # Definition of the number of timestep
+Nₜ = 250                     # Definition of the number of timestep
 T = 25                      # Duration of the simulation
 timeT = LinRange(0,T,Nₜ+1)   # Time Lattice
 
@@ -42,9 +42,21 @@ sol = dynamics(h(E, ϵ, R₀, Nmax, Nmin), ϕ₀fun, (C,L2Z(Nmin,Nmax)); T = T, 
 loss(Γ, sol, time) = norm(sqeuclidean(proba(ϕ₀,sol),exp.(-2*Γ[1].*time*ϵ^2)))^2
 
 # Init guess for the optimization
+E_Array = LinRange(-2,2,100)
+Γ_ϵ = []
 Γ₀ = 1.0
 
-opt = optimize(Γ -> loss(Γ, sol, timeT), [Γ₀]; iterations=100)
-res = Optim.minimizer(opt)
+@time for e in E_Array
+    sol_E = dynamics(h(e, ϵ, R₀, Nmax, Nmin), ϕ₀fun, (C,L2Z(Nmin,Nmax)); T = T, Nₜ = Nₜ)
+    opt = optimize(Γ -> loss(Γ, sol_E, timeT), [Γ₀]; iterations=100)
+    res = Optim.minimizer(opt)
+    push!(Γ_ϵ, res[1])
+end
 
-
+plt = plot(E_Array, 1 ./ (2 .* sqrt.(1 .- E_Array .^2 ./ 4)), label = "Théorique", lw=5, ls = :dot)
+plot!(E_Array, Γ_ϵ, size = (900,600), margin = 1Plots.cm, legendfontsize=14, legend = :bottomright, titlefontsize=1,
+guidefontsize=14, tickfontsize=14, lw=5, label = "Numérique")
+xlabel!(L"E")
+ylabel!(L"-Γ(ϵ)/ϵ^2")
+title!("-Γ(ϵ)/ϵ^2 selon la valeur de la valeur propre initial E")
+savefig(plt,"image/Γ(ϵ) selon la valeur de la valeur propre initial E")
