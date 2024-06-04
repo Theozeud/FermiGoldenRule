@@ -54,7 +54,7 @@ E_Array = LinRange(-2,2,100)
 end
 
 plt = plot(E_Array, 1 ./ (2 .* sqrt.(1 .- E_Array .^2 ./ 4)), label = "Théorique", lw=5, ls = :dot)
-plot!(E_Array, Γ_ϵ, size = (900,600), margin = 1Plots.cm, legendfontsize=14, legend = :bottomright, titlefontsize=1,
+plot!(E_Array, Γ_ϵ, size = (900,600), margin = 1Plots.cm, legendfontsize=14, legend = :bottomright, titlefontsize=14,
 guidefontsize=14, tickfontsize=14, lw=5, label = "Numérique")
 xlabel!(L"E")
 ylabel!(L"-Γ(ϵ)/ϵ^2")

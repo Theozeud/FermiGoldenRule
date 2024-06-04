@@ -161,7 +161,7 @@ Année scolaire 2023-2024
 
 \section{Résumé}
 
-Dans ce document, on s'intéresse à différentes preuves d'une règle de la physique quantique : la règle d'or de Fermi. Elle stipule qu'en présence d'une petite perturbation, à quelques conditions près, un état quantique quitte son état d'origine de façon irréversible avec une décroissance exponentielle en temps. Cette loi est bien connu du monde de la physique, mais des preuves rigoureuses et générales de cette loi sont à chercher du côté des mathématiciens. Différentes preuves existent et nous nous intéressons dans ce document à deux schémas de preuves complètement différents. La première utilise la théorie spectrale (approche par les résonances), la deuxième la théorie des équations aux dérivées ordinaires (approche de Davies). Cette règle d'or de Fermi ne peut exister que pour des systèmes de dimension infinie, mais devant faire des simulations sur ordinateur, je me suis posé quelques questions concernant le passage d'un système de dimension fini vers un système de dimension infini pour lequel la règle d'or de Fermi existe. L'exemple qui m'a intéressé en particulier est le modèle d'une chaîne 1D que l'on connecte par un site à un site extérieur.
+Dans ce document, on s'intéresse à différentes preuves d'une règle de la physique quantique : la règle d'or de Fermi. Elle stipule qu'en présence d'une petite perturbation, à quelques conditions près, un état quantique quitte son état d'origine de façon irréversible avec une décroissance exponentielle en temps. Cette loi est bien connu du monde de la physique, mais des preuves rigoureuses et générales de cette loi sont à chercher du côté des mathématiques. Différentes preuves existent et nous nous intéressons dans ce document à deux schémas de preuves complètement différents. La première utilise la théorie spectrale (approche par les résonances), la deuxième voit le problème sous la forme d'un problème d'évolution. L'exemple qui m'a intéressé en particulier est le modèle d'une chaîne 1D que l'on connecte à un site extérieur. Celui servira d'illustration tout au long de rapport.
 
 \newpage
 
@@ -316,14 +316,14 @@ où $H(t)$ est l'opérateur correspondant à l'hamiltonien du système à l'inst
 
 Nous présentons maintenant une autre notion beaucoup étudiée en mécanique quantique : les perturbations.
 En effet, en physique quantique, il arrive souvent que le système que l'on étudie sois soumis à une perturbation. Par exemple, si une particule, initialement libre, se retrouve soumise à un potentiel. Lorsque l'on parle de perturbation, il est souvent entendu qu'elle est petite, il s'agit vraiment d'une perturbation et est souvent facteur d'un réel positif $\epsilon$ pour contrôler l'amplitude de la perturbation.
-Concrètement, un perturbation signifie que notre hamiltonien de départ $H_0$ se retrouve remplacé par un nouvel hamiltonien $H(\epsilon) := H_0 + \epsilon H_1$ où $H_1$ est aussi un opérateur autoadjoint représentant la perturbation. Étant donné que les valeurs propres des opérateurs jouent un rôle centrale en mécanique, puisque pour rappel ceux sont les seules informations que l'on peut mesurer, il faut donc étudier les valeurs propres de l'hamiltonien perturbé. Plusieurs théories permettent de tels études selon les caractéristiques de la perturbation. On peut par exemple la théorie des perturbations classiques, souvent présenté en cours de physique, et les théories de Kato et de la diffusions, présentés dans des cours de théorie spectrale. Dans ce projet, nous serons amené à étudier l'évolution de valeurs propres avec la perturbation.
+Concrètement, un perturbation signifie que notre hamiltonien de départ $H_0$ se retrouve remplacé par un nouvel hamiltonien $H(\epsilon) := H_0 + \epsilon H_1$ où $H_1$ est aussi un opérateur autoadjoint représentant la perturbation. Étant donné que les valeurs propres des opérateurs jouent un rôle centrale en mécanique quantique, puisque pour rappel ceux sont les seules informations que l'on peut mesurer, il faut donc étudier les valeurs propres de l'hamiltonien perturbé. Plusieurs théories permettent de telles études selon les caractéristiques de la perturbation. On peut par exemple citer la théorie des perturbations classiques, souvent présenté en cours de physique, et les théories de Kato et de la diffusion, présentés dans des cours de théorie spectrale. Dans ce projet, nous serons amené à étudier l'évolution de valeurs propres en fonction de l'amplitude de la perturbation.
 
 \newpage
 \subsection{La règle d'or de Fermi} 
 
 Maintenant que nous avons rappelé les principes de la modélisation mathématique de la mécanique quantique, nous pouvons présenter le sujet de ce projet : la règle d'or de Fermi. \\
 
-Cette règle stipule que si un système, se trouvant dans un état propre énergétique, subit une perturbation, celui-ci peut, sous certaine hypothèses sur cette perturbation, soit rester dans l'état initiale avec une probabilité de 1 à un $o_\epsilon(1)$ près qui est uniforme en temps, soit quitter irréversiblement cet état initial vers un continuum d'états propres de façon exponentielle en temps à un $o_\epsilon(1)$ près qui est toujours uniforme en temps.\\
+Cette règle stipule que si un système, se trouvant dans un état propre énergétique, subit une perturbation, celui-ci peut, sous certaines hypothèses sur cette perturbation, soit rester dans l'état initiale avec une probabilité de 1 à un $o_\epsilon(1)$ près qui est uniforme en temps, soit quitter irréversiblement cet état initial vers un continuum d'états propres de façon exponentielle en temps à un $o_\epsilon(1)$ près qui est toujours uniforme en temps.\\
 
 
 Rentrons maintenant dans le formalisme mathématique. Nous allons pour cela considérer un système initial régit par un hamiltonien $H_0$ sur un espace de Hilbert $\mathcal{H}$, dont le produit scalaire hermitien est noté $\langle \cdot, \cdot, \rangle$ et la norme $||\cdot ||$. L'état initial à $t=0$ est $\vp_0$ qui est un vecteur propre de $H_0$ pour la valeur propre $\lambda_0$. On note $\mathcal{K}_0$ le sous-espace propre associé et $m$ sa dimension. Dans la décomposition $\mathcal{K}_0 \oplus \mathcal{K}_0^\perp$, l'hamiltonien s'écrit :
@@ -340,11 +340,11 @@ B        & \Gamma \\
 \Gamma^* &  C
 \end{pmatrix}
 \end{equation}
-où $B$ et $C$ sont des opérateurs auto-adjoints respectivement de $\mathcal{K}_0$ et $\mathcal{K}_0^\perp$, et où $\Gamma$ est une application linéaire borné de $\mathcal{K}_0^\perp$ vers $\mathcal{K}_0$, et $\Gamma^*$ sont application adjointe. L'évolution du système est donc régit par l'hamiltonien
+où $B$ et $C$ sont des opérateurs auto-adjoints respectivement de $\mathcal{K}_0$ et $\mathcal{K}_0^\perp$, et où $\Gamma$ est une application linéaire bornée de $\mathcal{K}_0^\perp$ vers $\mathcal{K}_0$, et $\Gamma^*$ son application adjointe. L'évolution du système est donc régit par l'hamiltonien perturbé
 \begin{equation}
     H(\epsilon) = H_0 + \epsilon H_1
 \end{equation}
-de sorte que, si $\vp(t)$ est l'état du système à l'instant $t$, on ait pour tout $t\geq 0$ :
+de sorte que, si $\vp_\epsilon(t)$ est l'état du système à l'instant $t$, on ait pour tout $t\geq 0$ :
 \begin{eqnarray}
     \vp_\epsilon(t) = e^{-iH(\epsilon)t}\vp_0.
 \end{eqnarray}
@@ -359,7 +359,7 @@ La règle d'or de Fermi a pour but de donner une approximation à l'ordre zéro 
 \begin{equation}
     |\la \vp_0, \vp_\epsilon(t) \ra |^2 = e^{2\Gamma(\epsilon)t} + o_\epsilon(1)
 \end{equation}
-où $\Gamma(\epsilon)$ est un coefficient réel négatif. 
+où $\Gamma(\epsilon)$ est un coefficient réel négatif.  Dans la suite, nous omettrons souvent l'indice $\epsilon$ de $\vp_\epsilon$.
 
 
 \begin{ex}
@@ -380,9 +380,9 @@ où $E\in\R$, $R_0\in\Z$, $A$ est l'opérateur auto-adjoint de $\ell^2(\Z,\C)$ d
 \end{equation}
 pour $n\in\Z$ et où $\lp e_i\rp_{i\in\Z}$ est la base canonique de $\ell^2(\Z,\R)$ et $\lp e_i\rp_{i\in\Z}^*$ sa base duale. En repérant par $(z,u)$ un élément de $\C\oplus\ell^2(\Z,\C)$, l'état initial est $(1,0)$ qui est un vecteur unitaire propre de $H_0$ pour la valeur propre $E$. Ici $\C$ s'interprète comme le sous-espace propre $\mathcal{K}_0$ de $E$ qui est donc de dimension $1$.
 
-En l'absence de perturbation, le modèle s'interprète comme l'union d'un site et d'une chaîne qui n'interagissent pas. En l'absence de perturbation, l'état du système va rester $(1,0)$ à une phase $e^{i\theta}$ pour $\theta\in[0,2\pi[$ près. 
+En l'absence de perturbation, le modèle s'interprète comme l'union d'un site et d'une chaîne qui n'interagissent pas. L'état du système va rester $(1,0)$ à une phase $e^{i\theta}$ pour $\theta\in[0,2\pi[$ près. 
 
-La perturbation introduite vient connecter le site $\C$ avec le site de la chaîne localisé en $R_0\in\Z$. Ainsi il y aura possiblement un échange d'information, de densité de probabilité entre le site la chaîne qui ne peut se faire que par l'intermédiaire du site en $R_0$. Contrairement au cas général, il n'y a pas de perturbations dans les blocs diagonales ce qui impliquera des simplifications. 
+La perturbation introduite vient connecter le site $\C$ avec le site de la chaîne localisé en $R_0\in\Z$. Ainsi il y aura possiblement un échange d'information, de densité de probabilité entre le site la chaîne qui ne peut se faire que par l'intermédiaire du site en $R_0$. Contrairement au cas général, il n'y a pas de perturbation dans les blocs diagonales ce qui impliquera des simplifications. 
 Toute la complexité du modèle se retrouve donc être contenue dans $A$ qui partage l'information de chaque site pour la donner équitablement à ses voisins. $A$ peut être simplement vue comme la matrice tridiagonale infinie dénombrable :
 \begin{equation}
    A = \begin{pmatrix}
@@ -460,9 +460,9 @@ Son spectre est entièrement continue et est $\sigma(A) = [-2,2]$. Pour le voir,
 \caption{Chaîne 1D connecté à un site en $R_0$}
 \end{figure}\\
 
-Nous présentons maintenant quelque simulations de ce système et le calcul de la probabilité de rester dans l'état de départ au cours du temps. Pour ce faire, nous allons considérer $R_0 = 0$ et discrétiser $\Z$ par $\{N_{min} = - N_{max},\cdots,0,\cdots, N_{max}\}$. Le schéma numérique est simple : on part de la même condition initiale (qui n'a pas besoin d'être discrétiser) et on calcule la solution $\vp_{n+1} = (z_{n+1}, (u)_{n+1})$ au temps $t_{n+1} = (n+1)\Delta t$ par la formule $\phi_{n+1} = e^{-i\Delta t A_n}\vp_n$ où $\Delta t>0$ est le pas de temps, pris constant, et $A_n$ la projection de $A$ dans le sous-espace de dimension finie des suites $(u_i)_{-N_{max}\leq i \leq N_{max}}$ à valeurs complexes.
+Nous présentons maintenant le calcul de la probabilité de rester dans l'état de départ au cours du temps. Pour ce faire, nous allons considérer $R_0 = 0$ et discrétiser $\Z$ par $\{N_{min} = - N_{max},\cdots,0,\cdots, N_{max}\}$. Le schéma numérique est simple : on part de la même condition initiale (qui n'a pas besoin d'être discrétiser) et on calcule la solution $\vp_{n+1} = (z_{n+1}, (u)_{n+1})$ au temps $t_{n+1} = (n+1)\Delta t$ par la formule $\phi_{n+1} = e^{-i\Delta t A_n}\vp_n$ où $\Delta t>0$ est le pas de temps, pris constant, et $A_n$ la projection de $A$ dans le sous-espace de dimension finie des suites $(u_i)_{-N_{max}\leq i \leq N_{max}}$ à valeurs complexes.
 
-Prenons déjà le cas sans perturbation, i.e $\epsilon = 0$. Dans ce cas, le système ne peut quitter l'espace propre $\mathcal{K}_0$ et rester donc dans l'état propre initial (à un facteur de phase près) avec une probabilité de 1 à un $o_\epsilon(1)$ près.\\
+Prenons déjà le cas sans perturbation, i.e $\epsilon = 0$. Dans ce cas, le système ne peut quitter l'espace propre $\mathcal{K}_0$ et reste donc dans l'état propre initial (à un facteur de phase près) avec une probabilité de 1 à un $o_\epsilon(1)$ près.\\
 
 
 \begin{figure}[h]
@@ -471,7 +471,7 @@ Prenons déjà le cas sans perturbation, i.e $\epsilon = 0$. Dans ce cas, le sys
         \caption{$\epsilon = 0$}
 \end{figure}
 
-En présence d'une perturbation, on remarque que le système quitte l'état propre initial de façon exponentielle avec quelques oscillations, dues à la discrétisation en dimension finie, selon la valeur de la valeur propre initiale $E$. Lorsque $E\in\spec(A)$, il y a décroissance exponentielle : le site et la chaîne peuvent s'échanger de l'information. Dans le cas contraire, les deux systèmes "ne sont pas énergétiquement connectés" et le système reste dans son état initiale avec quelque variations (induites par le $o_\epsilon(1)$. On remarque aussi que le coefficient $\Gamma(\epsilon)$ varie effectivement avec $\epsilon$.
+En présence d'une perturbation, on remarque que le système quitte l'état propre initial de façon exponentielle avec quelques oscillations, dues à la discrétisation en dimension finie, selon la valeur de la valeur propre initiale $E$. Lorsque $E\in\sigma(A)$, il y a décroissance exponentielle : le site et la chaîne peuvent s'échanger de l'information. Dans le cas contraire, les deux systèmes "ne sont pas énergétiquement connectés" et le système reste dans son état initiale avec quelques variations (induites par le $o_\epsilon(1)$. On remarque aussi que le coefficient $\Gamma(\epsilon)$ varie effectivement avec $\epsilon$.
 
 \begin{figure}[h]
     \centering
@@ -500,7 +500,7 @@ Comme nous l'avons dit, la règle d'or de Fermi est un résulta bien connue des 
 \section{Approche par les résonances}
 
 Dans cette partie, nous abordons l'approche dite par les résonances, dénomination que nous expliquerons dans la suite. Pour ce faire, nous commençons par expliquer les grandes lignes de cette approche.
-Rappelons les notations. Soit $H(\epsilon)$ un hamiltonien dépendant du paramètre réel positif $\epsilon$ qui est somme d'un hamiltonien initial $H_0$ et d'une perturbation $\epsilon H_1$. On suppose que l'état initial est un vecteur propre $\vp_0$ unitaire $H_0$ associé à une valeur propre $\lambda_0$ de multiplicité finie $m$. Si on note $\mathcal{K}_0$, le sous-espace propre associée, on peut écrire une décomposition de $H(\epsilon)$ dans $\mathcal{K}_0 \oplus \mathcal{K}_0^\perp$ : 
+Rappelons les notations. Soit $H(\epsilon)$ un hamiltonien dépendant du paramètre réel positif $\epsilon$ qui est somme d'un hamiltonien initial $H_0$ et d'une perturbation $\epsilon H_1$. On suppose que l'état initial est un vecteur propre $\vp_0$ unitaire $H_0$ associé à une valeur propre $\lambda_0$ de multiplicité finie $m$. Si on note $\mathcal{K}_0$, le sous-espace propre associé, on peut écrire une décomposition de $H(\epsilon)$ dans $\mathcal{K}_0 \oplus \mathcal{K}_0^\perp$ : 
 $$H(\epsilon) := 
 \underbrace{\begin{pmatrix}
 \lambda_0I_m & 0 \\
@@ -530,7 +530,7 @@ Le résultat est logique puisque, en l'absence de perturbation, $\KK_0$ est un s
     &=&  \limeo \mid \langle \vp_0 | \epsilon\im\lp - i\epsilon\rp\inv \vp_0 \rangle\mid^2\\
     &=&  \mid \langle \vp_0 | \vp_0 \rangle\mid^2 = 1.
 \end{eqnarray*}
-Pour passer de la deuxième ligne à la troisième ligne, on a utilisé le fait que l'inverse d'un opérateur par bloc est l'opérateur par bloc des inverses. 
+Pour passer de la deuxième ligne à la troisième ligne, on a utilisé le fait que l'inverse d'un opérateur par bloc est l'opérateur par bloc des inverses des blocs. 
 Pour généraliser cette approche, on fait face à trois difficultés :
 \begin{enumerate}
     \item[1] La difficulté la plus simple à surmonter concerne le passage de la deuxième ligne à la troisième ligne : l'opérateur perturbé n'étant pas diagonal par bloc, il nous faudra étudier quelle est l'expression de sa résolvante sur le bloc $(\KK_0,\KK_0)$, ce que nous faisons ci-après (\ref{matrice_livsic}).
@@ -544,7 +544,7 @@ Nous abordons dans cette partie la notion de matrice de Livsic qui a été intro
 
 Faisons un petit rappel sur la résolvante notée $R(z) := (H-z)\inv$. Cette quantité est bien définie sur le complémentaire du spectre de $H$ et y est holomorphe. A l'instar des différents types de singularités en analyse complexe, cette quantité est méromorphe sur une certaine partie du spectre : le spectre discret. Pour rappel, le spectre discret $\sigma_d(H)$ est l'ensemble des valeurs propres de multiplicité finie de $H$. La résolvante est donc méromorphe sur le complémentaire du spectre essentiel $\sigma_{ess}(H) = \sigma(H)\setminus\sigma_d (H)$. La compression $PR(z)P$ est donc aussi méromorhpe sur  $\C\setminus\sigma_{ess}(H)$.
 
-Commençons par établir l'existence d'une telle matrice $B(z)$. Celle-ci repose sur le faire que la compression $PR(z)P$ est un opérateur de dimension finie, i.e une matrice, et la proposition suivante.
+Commençons par établir l'existence d'une telle matrice $B(z)$. Celle-ci repose sur le fait que la compression $PR(z)P$ est un opérateur de dimension finie, i.e une matrice, et la proposition suivante.
 
 \begin{prop}
     $PR(z)P$ est inversible pour $z\in\C\setminus\R$.
@@ -839,7 +839,7 @@ Nous nous sommes ensuite intéressé à un autre théorème de concentration spe
  
  Nous reprenons les notations de l'introduction de cette section. Pour des raisons techniques, nous allons nous concentrer sur le cas particulier où $\dim \mathcal{K}_0 = 1$. 
 
- \begin{Def}[Résonances simple]
+ \begin{Def}[Résonance simple]
      Supposons $\dim \mathcal{K}_0 = 1$. On dira que la famille d'opérateur $(H(\epsilon))_{\epsilon \geq 0}$ possède une résonance en $\lambda_0\in\R^*$ s'il existe
      \begin{enumerate}
          \item un voisinage réel $I$ de $\lambda_0$,
@@ -857,7 +857,7 @@ Nous nous sommes ensuite intéressé à un autre théorème de concentration spe
 Expliquons un peu cette définition de résonance et pourquoi de telles hypothèses. L'hypothèse de prendre un voisinage $I$ de $\lambda_0$ et de regarder un certain prolongement autour de $I$ est assez logique car on va perturber légèrement le système qui se trouve initialement en $\lambda_0$. Il est aussi logique de considérer un voisinage $U$ de $0$ car on s'intéresse à une limite en $0$ de la perturbation d'amplitude $\epsilon$. Passons à moins évident : le fait de regarder un sous-espace vectoriel $\mathcal{H}^+$ dense de $\mathcal{H}$ au lieu de tout simplement $\mathcal{H}$. En fait, cela vient du fait que l'on souhaite à prolonger de façon continue (et même Lipschitz) la résolvante du bloc $(\mathcal{K}_0^\perp,\mathcal{K}_0^\perp)$ de l'hamiltonien perturbé. Pour avoir cette prolongation, il faut ne pas intersecter le spectre de $H(\epsilon)$, ce qui pourrait être un problème. En effet, puisque $\lambda_0$ n'est pas une valeur propre de $P^\perp H_0 P^\perp$, il en est de même de $\lambda(\epsilon)$ vis à vis de $P^\perp H(\epsilon)P^\perp$ pour $\epsilon$ suffisamment petit. Cependant $\lambda(\epsilon)$ peut tout à fait appartenir au spectre non ponctuel de $P^\perp H(\epsilon)P^\perp$. Par exemple si $\lambda(\epsilon)$ est dans le spectre continue de $P^\perp H(\epsilon)P^\perp$, l'opérateur $P^\perp H(\epsilon)P^\perp - \lambda(\epsilon)$ n'est pas surjective de $\mathcal{H}$ dans $\mathcal{H}$, mais à image dense. On ne peut donc inverser cette opérateur que sur ce sous-ensemble, ce qui constitue notre $\mathcal{H}^+$. En somme, l'introduction de $\mathcal{H}^+$ associé à l'hypothèse a) permet de permet de prendre en compte des cas plus généraux, qui sont d'ailleurs les seuls intéressants pour la règle d'or de Fermi ! (cf remarque []). L'explication est d'ailleurs encore plus clair dans le cas de l'exemple de la chaîne 1D puisque $P^\perp H(\epsilon) P^\perp = P^\perp H_0 P^\perp$. Les hypothèses b) et c) ont pour but à rendre possible l'étude dans $\mathcal{H}^+$.\\
 
 Passons maintenant au théorème.
-\begin{theo}[Concentration spectrale - Orth (1990)]
+\begin{theo}[Concentration spectrale - Orth (1990)]\label{Orth}
     Supposons que la famille d'opérateurs $(H(\epsilon))_{\epsilon \geq 0}$ possède une résonance en $\lambda_0$. 
     \begin{enumerate}
         \item L'équation $z = \operatorname{Re}(B(z,\epsilon))$ possède une unique solution $\lambda(\epsilon)$ qui dépend continûment de $\epsilon$. On note dans la suite $B(\epsilon) := B(\lambda(\epsilon),\epsilon) = \lambda(\epsilon) - i\Gamma(\epsilon)$.
@@ -976,14 +976,7 @@ Mais pour utiliser la formule de Stokes, il faut s'assurer que la matrice de Liv
 
 \begin{proof}
 \,
-Si l'on reprend la définition de résonance de Orth, si 
-$\mu(\epsilon)$ est une valeur propre de $H(\epsilon)$ qui appartient à $I$ pour $\epsilon \in U$ alors $\mu(\epsilon)\in \mathcal{H}^+$ et par le fait que l'on puisse prolonger $z\in\C\setminus\R \mapsto \lp P^\perp H(\epsilon)P^\perp - z\rp^{-1}$ se prolonge sur $I$ comme opérateur borné de $\mathcal{H}^+$ vers $\mathcal{H}^-$, cela implique que $\mu(\epsilon)$ ne peut être une valeur propre  de $P^\perp H(\epsilon)P^\perp$. Ainsi, si $\psi(\epsilon)$ est un vecteur propre associé à $\mu(\epsilon)$ alors $P\psi(\epsilon) \neq 0$. De plus, par le calcul, on a 
-        \begin{eqnarray*}
-             (\mu(\epsilon) - z)^{-1}P\psi(\epsilon) &=& P(H(\epsilon) - z)^{-1}\psi(\epsilon) \\
-             &=& P(H(\epsilon) - z)^{-1}P\psi(\epsilon) + P(H(\epsilon) - z)^{-1}P^\perp\psi(\epsilon) \\
-             &=& (B(z,\epsilon) - z)^{-1}\psi(\epsilon)  
-         \end{eqnarray*}
-Pour le deuxième point, il suffit de voir que par le théorème de concentration spectrale $\lim\limits_{\epsilon \rightarrow 0^+} E_{\epsilon}(\lambda(\epsilon)) = P$ (car $J(\epsilon) = \{\lambda(\epsilon)\}$)
+Voir \cite{Orth1990}
 \end{proof}
 
 Ainsi, puisque nous avons supposé $\Gamma(\epsilon)\neq 0$, $J(\epsilon)$ ne contient pas de valeur propre. De plus, par hypothèse il est possible de prolonger la matrice de Livsic dans un voisinage de la valeur propre $\lambda_0$ donc sur $J(\epsilon)$ pour $\epsilon$ suffisamment petit. On peut donc bien appliquer la formule de Stones comme nous l'avons fait. Continuons. Ce que l'on doit maintenant étudier est la limite dans $L^1(\R)$ de $\mathbf{1}_{J(\epsilon)}\lp B(\lambda,\epsilon) - \lambda \rp^{-1}$. L'idée est que pour $\lambda\in J(\epsilon)$, $\lambda$ est suffisamment proche de $\lambda(\epsilon)$ "avec un bon comportement asymptotique" lorsque $\epsilon \rightarrow 0^+$, qui est due au fait que les bornes de $J(\epsilon)$ n'ont pas été choisis de façon quelconque avec $\epsilon$. Cette idée est résumée dans le lemme suivant :
@@ -996,9 +989,7 @@ Ainsi, puisque nous avons supposé $\Gamma(\epsilon)\neq 0$, $J(\epsilon)$ ne co
 \end{lem}
 
 
-\begin{proof}
-\,
-
+\begin{proof} Voir \cite{Orth1990}
 \end{proof}
 
 Puisque pour tout $\lambda \in \R$, $|e^{-i\lambda t}| = 1$, on obtient immédiatement aussi
@@ -1037,15 +1028,86 @@ Ainsi, dans ce cas la règle d'or de Fermi s'écrit comme dans le cas précéden
 \begin{rem}
 \begin{enumerate}
     \item On remarque que si $\Gamma(\epsilon) = 0$, alors la probabilité de rester dans l'état initial est $1$ à un $o(1)$ près. C'est quelque chose auquel on pouvait s'attendre. En effet, dans ce cas $\lambda(\epsilon)$ est une valeur propre de $H(\epsilon)$ et, comme classiquement en théorie des perturbations, le vecteur propre initial $\vp_0$ se retrouve déplacé de façon continue avec $\epsilon$. On reste donc dans le même état à $o(1)$ près en $\epsilon$.
-    \item Si $\lambda_0\notin $
-    \item Expliquons maintenant pourquoi nous nous sommes placé dans le cadre des hypothèses du théorème de Orth plutôt que celui de Howland. Cela vient principalement de la différence des hypothèses utilisées. Howland, lui, fait l'hypothèse d'un prolongement de la matrice de Livsic, alors que Orth fait l'hypothèse d'un prolongement de l'opérateur $H(\epsilon) - z $ sur le bloc $(\mathcal{K}_0^\perp,(\mathcal{K}_0^\perp)$. Les deux prolongements peuvent sembler équivalent mais il ne le sont pas à cause des facteurs ^$\Gamma$ et $\Gamma^*$ des blocs antidiagonaux. Cette différence est cruciale car dans le cadre des hypothèses prisent par Howland, il n'est pas possible de démontrer le lemme $\ref{absence_unwanted}$. Pour le retrouver, il faut alors remplacer l'hypothèse du prolongement analytique de la matrice de Livsic par celui de $P^\perp(H(\epsilon) - z)P^\perp$ et faire les même hypothèses de Orth concernant l'utilisation d'un sous-espace de Hilbert dense $\HH^+$, si on l'utilise. Ainsi, le théorème de concentration spectrale de Orth devient une généralisation de celui de Howland puisque le prolongement Lipschitz est moins fort que le prolongement analytique. C'est pourquoi nous avons utilisé le cadre du théorème de Orth dans ce qui a précédé.
+    \item Expliquons maintenant pourquoi nous nous sommes placé dans le cadre des hypothèses du théorème de Orth plutôt que celui de Howland. Cela vient principalement de la différence des hypothèses utilisées. Howland, lui, fait l'hypothèse d'un prolongement de la matrice de Livsic, alors que Orth fait l'hypothèse d'un prolongement de l'opérateur $H(\epsilon) - z $ sur le bloc $(\mathcal{K}_0^\perp,\mathcal{K}_0^\perp)$. Les deux prolongements peuvent sembler équivalent mais il ne le sont pas à cause des facteurs $\Gamma$ et $\Gamma^*$ des blocs antidiagonaux. Cette différence est cruciale car dans le cadre des hypothèses prisent par Howland, il n'est pas possible de démontrer le lemme $\ref{absence_unwanted}$. Pour le retrouver, il faut alors remplacer l'hypothèse du prolongement analytique de la matrice de Livsic par celui de $P^\perp(H(\epsilon) - z)P^\perp$ et faire les même hypothèses de Orth concernant l'utilisation d'un sous-espace de Hilbert dense $\HH^+$, si on l'utilise. Ainsi, le théorème de concentration spectrale de Orth devient une généralisation de celui de Howland puisque le prolongement Lipschitz est moins fort que le prolongement analytique. C'est pourquoi nous avons utilisé le cadre du théorème de Orth dans ce qui a précédé.
 \end{enumerate}
-    
 \end{rem}
 
-\begin{ex}
-    
-\end{ex}
+\subsection{Calcul du coefficient de décroissance $\Gamma(\epsilon)$ : application à la chaîne 1D connectée à un site}
+
+La question que l'on peut maintenant se poser :  comment peut-on calculer le coefficient $\Gamma(\epsilon)$ qui décrit la rapidité de l'irréversibilité, lorsqu'il y en a bien une ?\\ 
+
+Le théorème de concentration spectrale de Orth [\ref{Orth}] dit que le coefficient $\Gamma(\epsilon)$ est l'opposé de la partie imaginaire de la quantité 
+\begin{equation}
+    B(\lambda(\epsilon),\epsilon)
+\end{equation}
+où $\lambda(\epsilon)$ est solution de l'équation en $z$ :
+\begin{equation}
+    z = \operatorname{Re}(B(z,\epsilon)).
+\end{equation}
+Dans le cas de la chaîne, on remarque que quelque soit $z\in\R$, les coefficient de $A$ et de $e_{R_0}$ étant réels, il semblerait que 
+\begin{equation}
+    \operatorname{Im}\lp E - \epsilon^2 e_{R_0}^*(A-z)^{-1}e_{R_0}\rp = 0...
+\end{equation}
+et donc qu'il n'y ait pas de décroissance exponentielle ! Cela parait bien étrange au vu des figures présentes dans l'introduction : on voyait bien une décroissance exponentielle.  \\
+
+L'erreur vient donc du fait que l'opérateur $E - \epsilon^2e_{R_0}^*(A-z)^{-1}e_{R_0}$ possède bien une partie imaginaire, selon la valeur de $z$. Intuitivement, il faut comprendre ceci. Lorsque $z$ n'est pas dans le spectre de $A$, la résolvante $(A-z)^{-1}$ existe bien au sens classique comme pour les matrices. Si $z$ est une valeur propre, il est impossible de prolonger la résolvante depuis $\C$ vers $z$ puisque l'on a perdu l'injectivité de l'opérateur $A-z$, mais comme on l'on a vu et c'est ce qui a motivé les hypothèses, lorsque $z$ est dans le spectre continue, il reste possible d'étendre cette résolvante : rigoureusement il faut écrire ce prolongement $(A-z - i0^+)^{-1}$ et celui-ci ne vaut pas $(A-z)^{-1}$ au sens classique, bien que nous ayons noté ces deux quantités de façon similaire. Pour comprendre pourquoi l'opérateur $(A-z - i0^+)^{-1}$ a bien une partie imaginaire, on peut utiliser le théorème de Sokhotski-Plemlj :
+\begin{theo}[Sokhotski-Plemlj]
+    Soit $f$ une fonction continue complexe sur l'intervalle $[a,b]$ avec $a<0<b$. Alors, on a la limite suivante :
+    \begin{equation}
+        \lim\limits_{\epsilon \rightarrow 0^+} \int_a^b \f{f(x)}{x - i\epsilon} \dd x = i\pi f(0) + \mathcal{P} \int_a^b\f{f(x)}{x} \dd{x}
+    \end{equation}
+    où le symbole $\mathcal{P}$ est la valeur principale de Cauchy.
+\end{theo}
+Si on avait eu $b>a>0$, alors il n'y aurait pas eu de problème à calculer la limite de l'intégrale car on on n'aurait pas rencontré de singularité (le dénominateur ne s'annule jamais). On peut appliquer cette formule "en composant" par l'opérateur $A$ et en utilisant le fait que tout opérateur peut se diagonaliser vis à vis de sa résolution spectrale :
+\begin{equation}
+    A = \int_{\sigma(A)} \lambda \dd E_A(\lambda)
+\end{equation}
+et que l'on a la propriété suivante pour toute fonction $f$ suffisamment régulière :
+\begin{equation}\label{f_A}
+    f(A) = \int_{\sigma(A)} f(\lambda) \dd E_A(\lambda). 
+\end{equation}
+ Notons aussi que puisque le spectre de $A$ est entièrement continue, sa mesure spectrale $E_A$ est absolument continu par rapport à la mesure de Lebesgue (théorème de Radon-Nikodym) : il existe une fonction à valeurs réelles $p_A$ tel que $\dd E_A(\lambda) = p_A(\lambda) \dd \lambda$. Cette fonction $p_A$ est suffisamment régulière pour appliquer la propriété (\ref{f_A}).
+
+Ainsi, on obtient pur $z\in[-2,2]$:
+\begin{eqnarray}
+    E - \epsilon^2 e_{R_0}^*(A-z -i0^+)^{-1}e_{R_0} &=& E - \epsilon^2 \int_{-2}^2\f{e_{R_0}^*e_{R_0}}{\lambda - z - i0^+} \dd E_A(\lambda) \\ 
+    &=& E -  \epsilon^2 \int_{-2}^2\f{p_A(\lambda)}{\lambda - z - i0^+} \dd \lambda \\
+    &=& E -  \epsilon^2 \int_{-2+z}^{2+z}\f{p_A(\lambda + z)}{\lambda - i0^+} \dd \lambda \\
+    &=& \lp E - \epsilon^2 \mathcal{P} \int_{-2}^2\f{p_A(\lambda)}{\lambda - z} \dd{\lambda} \rp + i\pi\epsilon^2  p_A(z).
+\end{eqnarray}
+Si $z\notin [-2,2]$, alors l'intervalle $[-2+z,2+z]$ ne rencontre pas $0$, et comme dans la remarque précédente, aucune partie imaginaire ne sort. 
+
+Revenons à la règle d'or de Fermi. Il nous faut donc résoudre en premier lieu l'équation
+\begin{equation}
+    z = E - \epsilon^2 \mathcal{P} \int_{-2}^2\f{p_A(\lambda)}{\lambda - z} \dd{\lambda}.
+\end{equation}
+Cette équation n'est pas facile à résoudre. Ce que l'on peut dire, c'est qu'elle s'exprime comme la somme de $E$ et d'un terme d'ordre 2 en $\epsilon$ donc est de la forme $\lambda(\epsilon) = E + o(\epsilon)$. Cette observation est suffisante pour obtenir une bonne approximation du coefficient $\Gamma(\epsilon)$ : comme on va injecter cette solution dans le terme de la partie imaginaire qui est d'ordre 2 en $\epsilon$, pour avoir une approximation à l'ordre 2 en $\epsilon$ de $\Gamma(\epsilon)$, il suffit de garder le terme d'ordre $0$ de $\lambda(\epsilon)$, c'est à dire $E$. Ainsi, on obtient que 
+\begin{equation}
+    \Gamma(\epsilon) = -\epsilon^2 \pi p_A(E) + o(\epsilon^2).
+\end{equation}
+Il nous reste maintenant à calculer la densité de la résolution spectrale de $A$, $E_A$, par rapport à la mesure de Lebesgue. Sans rentrer dans les détails, il suffit d'exprimer $y=2\cos(2\pi x)$ en fonction de $x$ et de l'insérer pour trouver $\dd y = 4\pi\sin(2\pi x) \dd x$ en fonction de $y$, i.e $\dd y / \dd x = 4\pi\sin(\operatorname{arccoss}( y/2)  = 4\pi \sqrt{1-\f{y^2}{4}}$.
+Pourquoi fait-on cela ? La raison vient du fait que l'on avait vu en calculant le spectre de $A$ dans l'introduction que $A$ est conjugué à l'opération multiplication par $x\mapsto 2\cos(2\pi x)$, donc quelque chose de la forme $\int_{0}^{1} \cos(2\pi x) \dd x$ et du fait que l'on veut quelque chose de la forme $\lambda p_A(\lambda) \dd \lambda$ de sorte à que l'on puisse identifier $p_A(\lambda)$. Lorsque l'on veut résoudre $y=2\cos(2\pi x)$, comme il y a deux solutions possibles, on double la quantité obtenue pour avoir :
+\begin{equation}
+    p_A(\lambda) = \f{1}{2\pi \sqrt{1-\f{\lambda^2}{4}}}.
+\end{equation}
+L'ensemble de définition de cette densité est $[-2,2]$, c'est à dire le spectre de $A$, ce qui fait sens. Ainsi, on obtient que 
+\begin{equation}
+    \Gamma(\epsilon) = -\epsilon^2  \f{1}{2 \sqrt{1-\f{E^2}{4}}} + o(\epsilon^2).
+\end{equation}\\
+
+Pour vérifier ce calcul, nous pouvons comparer ce résultat à une simulation numérique. Pour ce faire, on simule à $\epsilon$ donné le système quantique et on calcule la probabilité $|\langle \vp_0 | \vp(t) \rangle |^2$ au cours du temps en s'arrêtant avant le rebond à la paroi, puis on minimise sur le coefficient $\Gamma\in\R$ la distance de cette probabilité à une gaussienne de la forme $e^{-2\epsilon^2\Gamma}$. On trouve ainsi le graphique suivant pour $\epsilon = 0.1$ :
+
+\begin{figure}[h]
+    \centering
+        \includegraphics[height=8cm]{Γ(ϵ) selon la valeur de la valeur propre initial E.png}
+        \caption{$-\Gamma(\epsilon)/\epsilon^2$ selon la valeur de la valeur propre initial E}
+\end{figure}
+ce qui valide les calculs précédents. Ainsi, on remarque qu'il y a bien une décroissance exponentielle d'autant plus forte que $E$ se rapproche du bord du spectre de $A$.
+
+\begin{rem}
+    Lorsque nous avons utilisé le théorème de Sokhotski-Plemelj, nous avons distinguer les cas $z\in[-2,2]$ et $z\notin[-2,2]$. Dans le dernier cas, aucune partie imaginaire n'apparaît et donc le coefficient $\Gamma(\epsilon)$ est nul : il n'y a pas de décroissance à l'infinie. On comprend pourquoi la règle d'or de Fermi est connu pour le cas d'une valeur propre plongé dans un spectre continue : c'est précisément un cas qui entraîne systématiquement une décroissance exponentielle et donc une irréversibilité.
+\end{rem}
+
 
 \newpage
 \section{Approche de Davies}
@@ -1237,6 +1299,8 @@ peut s'écrire en utilisant le fait que $K_l$ est à valeurs dans $E_0$ :
     \tilde{\mathcal{H}}_n(T)f(\tau) &=& \int_0^\tau \St{H}{(\tau-s)(n+1)^2}\Stt{H}{s(n+1)^2} P K_l f(s)\dd s \\
                                     &=& \St{\lambda_0}{\tau(n+1)^2}K_l \int_0^\tau \Stt{\lambda_0}{(2s)(n+1)^2} f(s) \dd s \\
 \end{eqnarray}
+
+[A compléter]
 
 \newpage
 \printbibliography
